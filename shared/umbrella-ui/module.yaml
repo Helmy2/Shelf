@@ -1,0 +1,26 @@
+product:
+  type: kmp/lib
+  platforms: [android]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/compose.module-template.yaml
+
+dependencies:
+  - //shared/umbrella-core
+  - //shared/core-presentation
+  - //shared/core-strings
+  - //shared/designsystem: exported
+  - //shared/navigation: exported
+  - $libs.compose.runtime
+  - $libs.compose.foundation
+  - $libs.compose.material3
+  - $libs.compose.ui
+  - $libs.koin.core
+  - $libs.koin.compose
+  - $libs.koin.composeNavigation3
+  - $libs.koin.composeViewModel
+
+settings:
+  android:
+    namespace: com.shelf.shared.umbrella.ui

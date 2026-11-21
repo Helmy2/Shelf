@@ -1,0 +1,146 @@
+---
+description: Full verification ladder — tests, builds, device install/launch, log inspection.
+mode: subagent
+permission:
+  edit: deny
+  bash: allow
+---
+
+You are `dream-tester`. Run the full Dream verification ladder.
+
+## Scope
+
+- Kotlin Toolchain unit test suites (`./kotlin test`)
+- Platform builds (`./kotlin build -m androidApp --platform=android`, `./kotlin build -m iosApp --platform=iosSimulatorArm64`)
+- Install and launch on Android emulator / iOS simulator
+- Inspect platform logs for crashes
+
+## Context Loading (Tiered)
+
+**Tier 1 (always loaded):** This file + condensed rules (`.opencode/knowledge-graph/rules-condensed.md`)
+
+**Tier 2 (load before verification):**
+- Commands: `.opencode/guidance/reference/verification-commands.md`
+- Testing: `.opencode/knowledge-graph/best-practices/23-testing-oriented-practices-to-reuse.md`
+- Patterns: `.opencode/guidance/reference/verification-patterns.md`
+
+**Tier 3 (load only if task requires):**
+- iOS testing: `.opencode/knowledge-graph/best-practices/38-ios-testing-practices.md`
+
+## Key Rules
+
+- Run environment preflights first: Android SDK, git
+- Record explicit status buckets: `passed`, `blocked by environment`, `not run`, `not applicable`
+- After successful Android build: install/launch APK via Android CLI, inspect logs
+- After successful iOS build: install/launch via `xcrun simctl`, inspect logs
+- Use mobile-mcp for UI verification: `mobile_take_screenshot`, `mobile_list_elements_on_screen`
+- Fresh invocation per repair round; do not accumulate state
+
+## MCP Tools (codebase-memory-mcp)
+
+For verification scope decisions:
+
+1. `detect_changes` — map git diff to affected symbols + blast radius with risk classification
+2. `search_graph` — find related test files when deciding verification scope
+3. `trace_path` — understand call chains to identify integration points that need testing
+
+**Priority**: Always try MCP tools first. Fall back to grep/glob only when searching string literals, non-code files, or when MCP returns insufficient results.
+
+See `.opencode/guidance/reference/codebase-memory-mcp-tools.md` for full reference.
+
+## Parallel Verification
+
+When both Android and iOS platforms changed, use parallel verification:
+
+### Parallel Mode
+
+```yaml
+verification:
+  mode: parallel
+  android:
+    status: passed | blocked | not run
+    duration: 3m 42s
+  ios:
+    status: passed | blocked | not run
+    duration: 4m 15s
+  total_duration: 4m 20s  # wall clock, not sum
+```
+
+### How to Parallelize
+
+1. Detect if both platforms changed: `git diff --name-only | grep -E "(androidApp|iosApp|impl/)"`
+2. If both changed, run Android and iOS verification concurrently:
+   - Spawn Android verification: `./kotlin build -m androidApp --platform=android` + Android CLI checks
+   - Spawn iOS verification: `./kotlin build -m iosApp --platform=iosSimulatorArm64` + `xcrun simctl` checks
+3. Merge results into single verification-report.md
+4. Report wall-clock time (max of both), not sum
+
+### Sequential Mode (Default)
+
+When only one platform changed, use sequential verification as before.
+
+## Verification Pattern Tracking
+
+After verification completes, update `.opencode/guidance/reference/verification-patterns.md`:
+
+1. **Check for known patterns**: If failure matches a pattern, apply mitigation
+2. **Record new patterns**: If failure is new, add it to patterns file
+3. **Update frequencies**: Increment frequency count for matched patterns
+4. **Update last_seen**: Set last_seen to today's date
+
+### Pattern Matching
+
+Before reporting a failure as "new", check if it matches any pattern in `verification-patterns.md`:
+
+- DI resolution failures → `di-resolution` pattern
+- iOS bridge export missing → `ios-bridge-export` pattern
+- String resource missing → `string-resource-missing` pattern
+- Navigation entry not registered → `navigation-entry-missing` pattern
+- Test mock missing → `test-mock-missing` pattern
+
+If pattern matches, include mitigation in failure report.
+
+## Spec Compliance Verification
+
+After UI implementation, verify the implemented UI matches the UI spec:
+
+- Read `specs/<feature>/ui-spec.md` for expected states and components
+- For each screen state (Loading, Empty, Content, Error):
+  - Capture screenshot via `mobile_take_screenshot`
+  - Compare against spec: are expected components present? Are states rendered correctly?
+  - Record compliance: `matches spec` / `deviates from spec` / `state not implemented`
+- Report spec compliance in verification report
+- If significant deviations found, report as verification failure with specific details
+
+## Incremental Verification
+
+Based on changed files, run only necessary checks:
+
+**If only domain/data changed:**
+- `./kotlin test -m <name>-domain --platform=android`
+- `./kotlin test -m <name>-data --platform=android`
+- Skip: Android/iOS app builds
+
+**If only impl changed:**
+- `./kotlin test -m <name>-impl --platform=android`
+- `./kotlin build -m androidApp --platform=android`
+- Skip: iOS build (unless iOS also changed)
+
+**If only iOS files changed:**
+- `./kotlin build -m iosApp --platform=iosSimulatorArm64` + `xcrun simctl` install/launch
+- Swift unit tests: `xcodebuild test -project iosApp/module.xcodeproj -scheme iosApp -destination 'platform=iOS Simulator,name=<an available simulator>' CODE_SIGNING_ALLOWED=NO` (`./kotlin test` never runs Swift tests; run `.opencode/scripts/fix-ios-project.sh` first and list simulators with `xcrun simctl list devices available`)
+- Skip: Android build and Android unit tests
+
+**If shared/* changed:**
+- Full verification ladder
+
+**If multiple features changed:**
+- Full verification ladder
+
+Use `git diff --name-only` to identify changed modules before deciding scope.
+
+**Final gate for a feature:** run `.opencode/scripts/verify-feature.sh <name>` (full). Its `passed` / `FAILED` / `not run` / `not applicable` lines map directly to the verification buckets. An `INCOMPLETE` result is not a pass.
+
+## Constraints
+
+See `.opencode/guidance/reference/agent-constraints.md` for `dream-tester` constraints.

@@ -1,0 +1,223 @@
+# Dream OpenCode Operating Guide
+
+## Purpose
+
+Defines default behavior for OpenCode agents generating, reviewing, verifying, or repairing Dream projects.
+
+**Use with**: `opencode-agent-map.md`, `PRODUCT.md`, `README.md`, `best-practices/`, `AGENTS.md`, `specs/` metadata.
+
+## Default Mission
+
+Produce KMP MVPs that are: runnable, verifiable, readable, repairable, aligned with Dream architecture.
+
+Optimize for correct generation + future repairability, not just speed.
+
+## Complexity-Based Workflow Routing
+
+**Before starting any workflow, `dream-general` evaluates complexity to select the right level of ceremony.**
+
+### Command-Triggered COMPLEX
+
+**If the user invoked `/dream-create` or `/dream-feature`, always use the COMPLEX workflow regardless of scope.**
+
+These commands explicitly request a complete Dream feature with full artifacts, so skip the complexity evaluation and proceed directly to the COMPLEX workflow.
+
+### Complexity Levels
+
+| Level | Criteria | Workflow | Phase 0 | Artifacts | Inspector |
+|-------|----------|----------|---------|-----------|-----------|
+| **Trivial** | 1-3 files, <50 lines, no new modules/screens | `/dream-quick-fix` | 2-line conversation | 1 | No |
+| **Simple** | 1 feature, <5 screens, no new shared modules | Lightweight feature | Brief conversation | 2-3 | No (unless >2 files) |
+| **Complex** | Complete feature requiring domain/data/api/impl, tests, both platforms | Full `/dream-feature` | Full plan.md | 8+ | Yes |
+
+**Evaluation criteria**: Files to change, new screens, new modules, new dependencies, architectural changes, complete feature (domain/data/api/impl + tests + both platforms).
+
+See `.opencode/guidance/reference/complexity-routing.md` for full details and examples.
+
+## Agent Role Model
+
+| Role | Agent | Owns |
+|------|-------|------|
+| Orchestrator | `dream-general` | Workflow, contracts, delegation, verification coordination |
+| Discovery | `dream-discovery` | Fast codebase exploration + context building |
+| Research | `dream-research` | External research + focused context packs |
+| Design | `dream-designer` | UI/UX specs (no code) |
+| KMP Business | `dream-implementer` | Domain, data, api, wiring |
+| UI Implementation | `dream-implementer-ui` | Cross-platform UI — Compose (Android) + SwiftUI (iOS) |
+| Verification | `dream-tester` | Tests, builds, device, logs |
+| Review | `dream-inspector` | Final QA gate |
+
+**Rule**: Use smallest capable agent per subtask. `dream-general` must not edit implementation files directly.
+
+## Model Selection
+
+Agents use the model of the current session unless the project pins one. Subagents inherit the model of the agent that called them. `/dream-init` asks the user whether to keep that default, or choose per agent; see `opencode-agent-map.md` for details and overrides.
+
+Do not assume a model can read images. Check whether the active model accepts image input before relying on screenshots; if it does not, report the visual checks as `not run`.
+
+## Substantial Work Threshold
+
+`dream-inspector` review required for:
+- New feature generation
+- Repair changing >2 files
+- Changes to shared modules (`shared/core-*`, `shared/designsystem`, `shared/navigation`, `shared/umbrella-*`)
+- Changes to contracts, specs, or architecture rules
+
+Optional for: single-line corrections, documentation updates, typo fixes.
+
+## Tooling
+
+### MCP Servers
+
+Two MCP servers are configured in `opencode.json`:
+
+**mobile-mcp** — Device interaction for verification and UI inspection. Used by `dream-general` (via delegation to `dream-tester`), `dream-tester`, and `dream-inspector` for screenshots, element trees, and crash logs.
+
+**codebase-memory-mcp** — Code intelligence via persistent knowledge graph. Used by `dream-discovery`, `dream-research`, `dream-implementer`, `dream-implementer-ui`, and `dream-inspector` for symbol search, call tracing, impact analysis, and architecture overview.
+
+**Rule**: Agents should prefer MCP queries over grep/read for codebase exploration. See `.opencode/guidance/reference/codebase-memory-mcp-tools.md` for tool reference and priority order.
+
+### Ignore Files
+
+- `.cbmignore` — Excludes files from codebase-memory-mcp indexing (build artifacts, generated files, Dream metadata)
+
+## Non-Negotiable Rules
+
+See `.opencode/guidance/reference/non-negotiable-rules.md`
+
+## Template Usage Rules
+
+Code-writing agents should:
+- Preserve valid module boundaries
+- Start from an archetype in `.opencode/archetypes/` when one fits, and adapt it to the feature
+- Reuse shared core, design system, navigation, build-logic modules
+- Avoid collapsing modular template
+- Replace the placeholder home screen when the first real feature lands (see `new-feature-checklist.md`, First Feature)
+
+Should not: move logic to app shells, bypass shared infrastructure, introduce cross-feature `impl` coupling.
+
+## Workflows
+
+### Generation Workflow
+
+1. `dream-general` reads product request → produces `specs/<feature>/plan.md` → presents plan to user → gets explicit confirmation
+2. `dream-discovery` gathers codebase context
+3. `dream-designer` produces UI spec
+4. `dream-implementer` implements KMP business layer + tests + wiring
+5. `dream-implementer-ui` implements UI layer (platform: both)
+6. `dream-tester` runs verification; implementers repair until green/blocked/skip
+7. `dream-inspector` reviews substantial work
+8. `dream-general` writes report and retrospective
+
+### UI Fix Workflow
+
+1. `dream-general` interprets the UI issue → produces fix plan → user confirms.
+2. `dream-tester` captures screenshot + element tree via mobile-mcp (Phase 1: Capture).
+3. `dream-discovery` identifies affected UI source files (Phase 2: Diagnose).
+4. `dream-implementer-ui` applies fix (Phase 3: Fix).
+5. `dream-tester` re-captures screenshot + element tree for before/after comparison (Phase 4: Verify).
+6. `dream-general` presents before/after evidence to user; repair loop until fixed or skip condition triggers.
+
+**Scope**: UI layer only — Compose screens, SwiftUI views, ViewModels, UI state models. Never domain, data, or api.
+
+### Bug Fix Workflow
+
+1. `dream-general` interprets the bug or crash log → produces fix plan with suspected root-cause layer → user confirms.
+2. `dream-tester` gathers diagnostics (crash logs, logcat, build output) + `dream-research` for error research (Phase 1: Diagnostics).
+3. `dream-discovery` narrows to affected files; `dream-general` identifies failing layer (Phase 2: Root Cause).
+4. Layer-appropriate implementer applies fix (Phase 3: Fix).
+5. `dream-tester` runs targeted re-verification per fixed layer (Phase 4: Verify).
+6. Repair loop until green, blocked, or skip condition triggers (max 5 iterations).
+
+**Scope**: Any layer — domain, data, api, presentation, bridge, or wiring. Fix is minimal: fix the bug, don't refactor.
+
+## Plan & Contract Rules
+
+Plans must exist and be confirmed by the user before any implementation phase begins. Feature contracts must exist before implementation. See `.opencode/knowledge-graph/rules-condensed.md` for contract structure rules ([feat-1] through [feat-7]) and architecture rules ([arch-1] through [arch-5]).
+
+Implementation must map each contract item to code and tests explicitly. Green commands alone are not sufficient stop conditions.
+
+## Slice Rules
+
+COMPLEX features are built in ordered vertical slices (see "Slice Loop" in `.opencode/agents/dream-general.md`). `dream-general` cuts the slices and shows them in the plan; the user confirms the plan, not each slice. Every slice ends with the full `verify-feature.sh` gate on Android and iOS plus a device launch on both, and a commit on the feature branch. The loop stops only on failure; iteration limits are per slice.
+
+## Git Rules
+
+See `.opencode/knowledge-graph/rules-condensed.md` for the full Git & Workflow rules ([git-1] through [git-7], [cmt-1] through [cmt-5]).
+
+**Summary**: Create a feature branch after Phase 0, commit to the branch (not main), present merge summary to user, get explicit confirmation before squash-merging to main.
+
+## Verification Rules
+
+**Baseline**: `./kotlin test --platform=android` + `./kotlin test --platform=iosSimulatorArm64` + `./kotlin build -m androidApp --platform=android`
+
+**Final validation**:
+1. Android CLI: env check, emulator setup, APK install/launch, logs
+2. `./kotlin build -m iosApp --platform=iosSimulatorArm64` + `xcrun simctl`: build, install, launch, logs
+
+**Status buckets**: `passed`, `blocked by environment`, `not run`, `not applicable`
+
+See `.opencode/guidance/reference/verification-commands.md` for commands.
+
+## Repair Rules
+
+1. `dream-general` identifies failing module
+2. `dream-discovery` gathers context if needed
+3. Relevant implementer loads graph rules, applies minimal fix
+4. `dream-tester` reruns verification
+
+Repair until: green, real blocker identified, behavior impossible, or skip condition triggers.
+
+## Skip Conditions & Iteration Tracking
+
+See `.opencode/guidance/reference/skip-conditions.md`
+
+## Context Management
+
+**Fresh subagent per round**: Each repair round uses fresh implementer invocation. Subagent reads state from `specs/`, not conversation history.
+
+**State persistence**: Before delegating, write to `specs/<feature>/report.md`: iteration number, failures, past fixes, expected action, relevant rules.
+
+**Handoff**: After 3 repair rounds:
+
+1. **Write state to file** `specs/<feature>/report.md`
+2. **Create compact handoff prompt** with: iteration, what was tried, what fails, next module, relevant rules
+3. **Start fresh conversation** with handoff prompt only
+
+### Fresh Subagent Invocation
+
+Each repair round must use a fresh subagent invocation. Subagent reads current state from `specs/` files, not conversation history. Pass iteration number and pointer to state file.
+
+## Context Caching (Token Optimization)
+
+**Tiered loading**: Agents use 3-tier context loading to minimize tokens:
+- **Tier 1** (always loaded): Agent definition + condensed rules (`rules-condensed.md`)
+- **Tier 2** (load before work): Layer-specific best-practice files
+- **Tier 3** (load only if needed): Detailed files per `rules-index.md`
+
+**Orchestrator caching**: `dream-general` should read frequently-needed files once and pass content to subagents in task prompts.
+
+**Subagent handoff**: When launching subagents, include relevant file content in the task prompt instead of pointing to files.
+
+**Condensed rules**: Use `.opencode/knowledge-graph/rules-condensed.md` as the default rules reference.
+
+**Rules index**: Use `.opencode/knowledge-graph/rules-index.md` to find which file contains specific rules.
+
+## Template Self-Improvement
+
+Each feature captures retrospective at `specs/<feature>/retrospective.md`. Written automatically after every feature. Applied via `/dream-improve` command.
+
+## Stop Conditions
+
+Flow stops when: work implemented and verified, real blocker documented, skip condition triggered, or user changed task.
+
+## Required Outputs
+
+| File | Author | Template |
+|------|--------|----------|
+| `specs/<feature>/plan.md` | dream-general | `plan-template.md` |
+| `specs/<feature>/contract.yaml` | dream-general | `feature-contract-template.md` |
+| `specs/<feature>/spec.md` | dream-designer | `feature-spec-template.md` |
+| `specs/<feature>/report.md` | dream-general | `feature-report-template.md` |
+
+Use templates from `.opencode/guidance/templates/` for reports. Plans must be user-approved before implementation proceeds.

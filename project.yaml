@@ -1,0 +1,12 @@
+modules:
+  - shared/core-domain
+  - shared/core-presentation
+  - shared/core-data
+  - shared/core-testing
+  - shared/core-strings
+  - shared/designsystem
+  - shared/navigation
+  - shared/umbrella-core
+  - shared/umbrella-ui
+  - androidApp
+  - iosApp

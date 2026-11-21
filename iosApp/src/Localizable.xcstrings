@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "placeholder_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No feature has been added yet. Choose an archetype from .opencode/archetypes and build the first feature."
+          }
+        }
+      }
+    },
+    "placeholder_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your app starts here"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

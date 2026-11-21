@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    ".opencode/guidance/opencode-agent-map.md",
+    ".opencode/guidance/dream-agent-operating-guide.md"
+  ],
+  "mcp": {
+    "mobile-mcp": {
+      "type": "local",
+      "command": [".opencode/scripts/start-mobile-mcp.sh"],
+      "enabled": true
+    },
+    "codebase-memory-mcp": {
+      "type": "local",
+      "command": [".opencode/scripts/start-codebase-memory-mcp.sh"],
+      "enabled": true
+    }
+  },
+  "compaction": {
+    "auto": true,
+    "prune": true,
+    "reserved": 10000
+  }
+}

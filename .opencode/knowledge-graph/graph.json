@@ -1,0 +1,1901 @@
+{
+  "metadata": {
+    "name": "best-practices-knowledge-graph",
+    "version": 1,
+    "sourceDocuments": [
+      ".opencode/knowledge-graph/best-practices/README.md"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "document.best_practices",
+      "type": "Document",
+      "title": "Extracted Best Practices Handbook",
+      "path": ".opencode/knowledge-graph/best-practices/README.md"
+    },
+    {
+      "id": "section.core_architecture",
+      "type": "Section",
+      "title": "Core Architectural Philosophy",
+      "sectionNumber": "3",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 1,
+        "endLine": 26
+      }
+    },
+    {
+      "id": "section.feature_template",
+      "type": "Section",
+      "title": "Feature Module Template",
+      "sectionNumber": "5",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 1,
+        "endLine": 62
+      }
+    },
+    {
+      "id": "section.dependency_rules",
+      "type": "Section",
+      "title": "Dependency Rules To Keep",
+      "sectionNumber": "6",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 1,
+        "endLine": 34
+      }
+    },
+    {
+      "id": "section.domain_practices",
+      "type": "Section",
+      "title": "Domain Layer Practices",
+      "sectionNumber": "9",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 1,
+        "endLine": 71
+      }
+    },
+    {
+      "id": "section.data_practices",
+      "type": "Section",
+      "title": "Data Layer Practices",
+      "sectionNumber": "10",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 1,
+        "endLine": 72
+      }
+    },
+    {
+      "id": "section.presentation_practices",
+      "type": "Section",
+      "title": "Presentation Layer Practices",
+      "sectionNumber": "14",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 1,
+        "endLine": 99
+      }
+    },
+    {
+      "id": "section.navigation_practices",
+      "type": "Section",
+      "title": "Navigation Practices",
+      "sectionNumber": "15",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "id": "section.resource_practices",
+      "type": "Section",
+      "title": "Resource And Localization Practices",
+      "sectionNumber": "17",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 1,
+        "endLine": 31
+      }
+    },
+    {
+      "id": "section.di_practices",
+      "type": "Section",
+      "title": "Dependency Injection Practices",
+      "sectionNumber": "18",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 1,
+        "endLine": 46
+      }
+    },
+    {
+      "id": "section.testing_practices",
+      "type": "Section",
+      "title": "Testing-Oriented Practices To Reuse",
+      "sectionNumber": "23",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/23-testing-oriented-practices-to-reuse.md",
+        "startLine": 1,
+        "endLine": 29
+      }
+    },
+    {
+      "id": "section.defaults",
+      "type": "Section",
+      "title": "Recommended Default Rules For Future Projects",
+      "sectionNumber": "25",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/25-recommended-default-rules-for-future-projects.md",
+        "startLine": 1,
+        "endLine": 36
+      }
+    },
+    {
+      "id": "section.anti_patterns",
+      "type": "Section",
+      "title": "Anti-Patterns To Avoid When Reusing This Architecture",
+      "sectionNumber": "26",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/26-anti-patterns-to-avoid-when-reusing-this-architecture.md",
+        "startLine": 1,
+        "endLine": 12
+      }
+    },
+    {
+      "id": "section.identity_practices",
+      "type": "Section",
+      "title": "Package And App Identity Practices",
+      "sectionNumber": "29",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/29-package-and-app-identity-practices.md",
+        "startLine": 1,
+        "endLine": 37
+      }
+    },
+    {
+      "id": "section.composition_root_practices",
+      "type": "Section",
+      "title": "Stable Composition Root Practices",
+      "sectionNumber": "30",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/30-stable-composition-root-practices.md",
+        "startLine": 1,
+        "endLine": 44
+      }
+    },
+    {
+      "id": "section.ui_quality_practices",
+      "type": "Section",
+      "title": "UI Quality And State Design Practices",
+      "sectionNumber": "31",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/31-ui-quality-and-state-design-practices.md",
+        "startLine": 1,
+        "endLine": 31
+      }
+    },
+    {
+      "id": "section.ios_project_structure",
+      "type": "Section",
+      "title": "iOS Project Structure Practices",
+      "sectionNumber": "35",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/35-ios-project-structure-practices.md",
+        "startLine": 1,
+        "endLine": 47
+      }
+    },
+    {
+      "id": "section.ios_kmp_bridge",
+      "type": "Section",
+      "title": "iOS KMP Bridge Practices",
+      "sectionNumber": "36",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 1,
+        "endLine": 43
+      }
+    },
+    {
+      "id": "section.ios_xcode_configuration",
+      "type": "Section",
+      "title": "iOS Xcode Configuration Practices",
+      "sectionNumber": "37",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/37-ios-xcode-configuration-practices.md",
+        "startLine": 1,
+        "endLine": 36
+      }
+    },
+    {
+      "id": "section.ios_testing",
+      "type": "Section",
+      "title": "iOS Testing Practices",
+      "sectionNumber": "38",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/38-ios-testing-practices.md",
+        "startLine": 1,
+        "endLine": 35
+      }
+    },
+    {
+      "id": "layer.domain",
+      "type": "Layer",
+      "name": "domain",
+      "description": "Pure business layer containing models, use cases, repository interfaces, and domain errors."
+    },
+    {
+      "id": "layer.data",
+      "type": "Layer",
+      "name": "data",
+      "description": "Runtime integration layer containing repository implementations, DTOs, local and remote sources, and boundary mapping."
+    },
+    {
+      "id": "layer.presentation",
+      "type": "Layer",
+      "name": "presentation",
+      "description": "UI-facing layer containing screens, view models, UI models, and presentation mappers."
+    },
+    {
+      "id": "layer.shared_core",
+      "type": "Layer",
+      "name": "shared_core",
+      "description": "Shared cross-cutting infrastructure split by responsibility."
+    },
+    {
+      "id": "layer.navigation",
+      "type": "Layer",
+      "name": "navigation",
+      "description": "App-shell routing and navigation ownership layer."
+    },
+    {
+      "id": "layer.design_system",
+      "type": "Layer",
+      "name": "design_system",
+      "description": "Shared tokens, components, and string resources."
+    },
+    {
+      "id": "module.feature.domain",
+      "type": "ModulePattern",
+      "name": "Feature Domain Module",
+      "pattern": "feature/<name>-domain",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 1,
+        "endLine": 30
+      }
+    },
+    {
+      "id": "module.feature.data",
+      "type": "ModulePattern",
+      "name": "Feature Data Module",
+      "pattern": "feature/<name>-data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 1,
+        "endLine": 42
+      }
+    },
+    {
+      "id": "module.feature.presentation",
+      "type": "ModulePattern",
+      "name": "Feature Presentation Module",
+      "pattern": "feature/<name>-impl",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 1,
+        "endLine": 58
+      }
+    },
+    {
+      "id": "practice.feature_based_packaging",
+      "type": "Practice",
+      "name": "Package by feature",
+      "statement": "Package product behavior by feature rather than by technical layer alone.",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 5,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "practice.shared_core_split",
+      "type": "Practice",
+      "name": "Split shared core by responsibility",
+      "statement": "Split shared core infrastructure by responsibility and dependency weight instead of using one giant core module.",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/08-shared-core-splitting.md",
+        "startLine": 1,
+        "endLine": 20
+      }
+    },
+    {
+      "id": "practice.typed_results",
+      "type": "Practice",
+      "name": "Use typed result wrappers",
+      "statement": "Use typed result wrappers for domain-facing operations and feature-specific error hierarchies for expected failures.",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 15,
+        "endLine": 33
+      }
+    },
+    {
+      "id": "practice.cancellation_safe_result_helpers",
+      "type": "Practice",
+      "name": "Use cancellation-safe suspend result helpers",
+      "statement": "Wrap suspend infrastructure work with one shared helper that rethrows CancellationException and maps only real failures into domain or app errors.",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 35,
+        "endLine": 43
+      }
+    },
+    {
+      "id": "practice.cache_first_reads",
+      "type": "Practice",
+      "name": "Prefer cache-first reads",
+      "statement": "Prefer local cache as the first read path in offline-first or low-churn features when appropriate.",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 29,
+        "endLine": 37
+      }
+    },
+    {
+      "id": "practice.small_mvi_base",
+      "type": "Practice",
+      "name": "Keep MVI infrastructure small",
+      "statement": "Keep the base MVI view model small and practical, providing only primitives the team actually uses.",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 19,
+        "endLine": 35
+      }
+    },
+    {
+      "id": "practice.callback_navigation_decoupling",
+      "type": "Practice",
+      "name": "Decouple feature UI from routing",
+      "statement": "Keep route-to-screen wiring in the shared composition root and keep feature modules free of global route dependencies unless they own a nested graph.",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "id": "practice.shared_strings",
+      "type": "Practice",
+      "name": "Centralize user-visible strings",
+      "statement": "Keep shared user-visible strings in shared/core-strings Compose Resources and export the generated Res class publicly for cross-module consumers.",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 3,
+        "endLine": 14
+      }
+    },
+    {
+      "id": "practice.constructor_injection",
+      "type": "Practice",
+      "name": "Prefer constructor injection",
+      "statement": "Use constructor injection for repositories, use cases, and view models whenever possible.",
+      "classification": "universal",
+      "strength": "default",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 20,
+        "endLine": 24
+      }
+    },
+    {
+      "id": "practice.shared_test_utilities",
+      "type": "Practice",
+      "name": "Reuse shared test utilities",
+      "statement": "Keep fake providers and coroutine-aware helpers in shared/core-testing and reuse them from feature tests.",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/23-testing-oriented-practices-to-reuse.md",
+        "startLine": 21,
+        "endLine": 29
+      }
+    },
+    {
+      "id": "platform.shared_logic_native_ui",
+      "type": "PlatformPattern",
+      "name": "Share business logic without forcing shared UI",
+      "statement": "Share domain and data logic broadly, but do not force shared UI when native UI is the better product choice.",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/19-android-and-ios-boundary-practices.md",
+        "startLine": 1,
+        "endLine": 23
+      }
+    },
+    {
+      "id": "practice.ios_host_structure",
+      "type": "Practice",
+      "name": "Keep iOS hosts structurally obvious",
+      "statement": "Native SwiftUI hosts should organize code under Core, Models, ViewModels, and Views, and iOS has no Compose host (Compose is Android-only).",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/35-ios-project-structure-practices.md",
+        "startLine": 5,
+        "endLine": 37
+      }
+    },
+    {
+      "id": "practice.swift_bridge_boundary",
+      "type": "Practice",
+      "name": "Use a dedicated Swift bridge boundary",
+      "statement": "Expose shared Kotlin capabilities to the native host through one dedicated bridge and keep Kotlin-to-Swift mapping inside that boundary.",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 5,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "practice.shared_xcode_schemes",
+      "type": "Practice",
+      "name": "Use shared Xcode schemes in packaged templates",
+      "statement": "Commit shared Xcode schemes under xcshareddata and do not depend on user-specific xcuserdata schemes in packaged templates.",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/37-ios-xcode-configuration-practices.md",
+        "startLine": 30,
+        "endLine": 36
+      }
+    },
+    {
+      "id": "rule.ios_export_requires_api_and_export",
+      "type": "Rule",
+      "name": "Swift-visible shared types require export plus api",
+      "statement": "If Swift should see types from dependent shared modules, the framework must export those modules and the dependency chain must use api instead of implementation.",
+      "scope": "platform",
+      "classification": "kmp_oriented",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 29,
+        "endLine": 35
+      }
+    },
+    {
+      "id": "rule.ios_framework_search_path",
+      "type": "Rule",
+      "name": "Keep iOS framework search paths deterministic",
+      "statement": "FRAMEWORK_SEARCH_PATHS should point at shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME) without duplicate or corrupted entries.",
+      "scope": "platform",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/37-ios-xcode-configuration-practices.md",
+        "startLine": 14,
+        "endLine": 20
+      }
+    },
+    {
+      "id": "rule.ios_xctest_packaging",
+      "type": "Rule",
+      "name": "Swift unit tests run in a hosted appTests target",
+      "statement": "The Xcode project has an app target (the only one with the Kotlin Toolchain integration script phase) and a hosted appTests unit-test target; Swift tests live in iosApp/test, use @testable import app, and run with xcodebuild test -scheme iosApp; ./kotlin test runs only Kotlin tests.",
+      "scope": "platform",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/38-ios-testing-practices.md",
+        "startLine": 5,
+        "endLine": 11
+      }
+    },
+    {
+      "id": "antipattern.swift_guessing_objc_api",
+      "type": "AntiPattern",
+      "name": "Guessing ObjC-shaped Swift API names",
+      "statement": "Do not guess underscore-suffixed enum cases, constructor labels, or other ObjC-shaped names in Swift because there is no SKIE: Kotlin enums and sealed classes are Swift classes, so switch needs a default branch.",
+      "replacementGuidance": "Verify the generated Objective-C API after shared changes and update Swift code to use the real class names, async signatures, and initializer labels.",
+      "classification": "kmp_oriented",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "id": "rule.dependency_direction",
+      "type": "Rule",
+      "name": "Canonical dependency direction",
+      "statement": "Enforce Presentation -> Domain <- Data dependency direction.",
+      "scope": "architecture",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "id": "rule.domain_pure_kotlin",
+      "type": "Rule",
+      "name": "Domain stays pure Kotlin",
+      "statement": "Domain must remain platform-agnostic and framework-light.",
+      "scope": "domain",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 5,
+        "endLine": 13
+      }
+    },
+    {
+      "id": "rule.domain_time_provider_only",
+      "type": "Rule",
+      "name": "Time flows through TimeProvider",
+      "statement": "Domain and feature code must not call Clock.System.now() directly and should access time through TimeProvider.",
+      "scope": "domain",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 49,
+        "endLine": 61
+      }
+    },
+    {
+      "id": "rule.repository_translates_infrastructure",
+      "type": "Rule",
+      "name": "Repositories own boundary translation",
+      "statement": "Repositories map DTOs and entities into domain models, convert infrastructure failures into domain errors, and expose domain-friendly return types.",
+      "scope": "data",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 5,
+        "endLine": 12
+      }
+    },
+    {
+      "id": "rule.rethrow_cancellation_exception",
+      "type": "Rule",
+      "name": "Never swallow coroutine cancellation",
+      "statement": "Repository helpers must always rethrow CancellationException.",
+      "scope": "data",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 14,
+        "endLine": 27
+      }
+    },
+    {
+      "id": "rule.feature_named_http_client",
+      "type": "Rule",
+      "name": "Prefer named per-feature HttpClient",
+      "statement": "Each data module that talks to a backend should own its own named HttpClient unless there is a strong reason to share one.",
+      "scope": "data",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 39,
+        "endLine": 51
+      }
+    },
+    {
+      "id": "rule.mapper_placement",
+      "type": "Rule",
+      "name": "Keep mappers at their boundaries",
+      "statement": "Keep DTO, entity, and domain mapping in data; keep domain-to-UI mapping in presentation.",
+      "scope": "architecture",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 53,
+        "endLine": 72
+      }
+    },
+    {
+      "id": "rule.presentation_state_action_event",
+      "type": "Rule",
+      "name": "Separate state, actions, and events",
+      "statement": "Presentation should distinguish long-lived state, input actions, and one-off events.",
+      "scope": "presentation",
+      "classification": "universal",
+      "strength": "default",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 5,
+        "endLine": 17
+      }
+    },
+    {
+      "id": "rule.lifecycle_backed_viewmodels",
+      "type": "Rule",
+      "name": "Use lifecycle-backed ViewModels for long-lived screen state",
+      "statement": "In multiplatform Compose apps, long-lived screen state should use lifecycle ViewModel rather than a plain class so Android preserves it across configuration changes.",
+      "scope": "presentation",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 35,
+        "endLine": 43
+      }
+    },
+    {
+      "id": "rule.sequential_action_queue",
+      "type": "Rule",
+      "name": "Process rapid UI actions sequentially",
+      "statement": "If actions can arrive rapidly, the base presentation layer should queue them through one sequential processor instead of launching one coroutine per action.",
+      "scope": "presentation",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 45,
+        "endLine": 53
+      }
+    },
+    {
+      "id": "rule.presentation_consistent_pattern",
+      "type": "Rule",
+      "name": "Use one consistent presentation pattern",
+      "statement": "Prefer one consistent presentation pattern across the app, using the shared MVI base unless there is a compelling reason not to.",
+      "scope": "presentation",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 63,
+        "endLine": 71
+      }
+    },
+    {
+      "id": "rule.app_shell_owns_navigation",
+      "type": "Rule",
+      "name": "App shell owns global navigation and theme",
+      "statement": "The root app shell should own app-wide navigation, theme application, and safe-area handling.",
+      "scope": "navigation",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 5,
+        "endLine": 12
+      }
+    },
+    {
+      "id": "rule.typed_routes",
+      "type": "Rule",
+      "name": "Use typed routes",
+      "statement": "Model Navigation 3 routes as typed values in one canonical shared route hierarchy instead of raw strings or duplicated route types.",
+      "scope": "navigation",
+      "classification": "universal",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 14,
+        "endLine": 24
+      }
+    },
+    {
+      "id": "rule.shared_ui_no_hardcoded_strings",
+      "type": "Rule",
+      "name": "No hardcoded user-visible strings in shared UI",
+      "statement": "All user-visible strings in shared UI should come from shared/core-strings resources or another deliberate shared resource module.",
+      "scope": "resources",
+      "classification": "kmp_oriented",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 3,
+        "endLine": 24
+      }
+    },
+    {
+      "id": "rule.top_level_di_start",
+      "type": "Rule",
+      "name": "Start DI only at the top level",
+      "statement": "Call startKoin only from top-level app initialization paths and do not let features bootstrap DI themselves.",
+      "scope": "di",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 5,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "rule.di_managed_viewmodels",
+      "type": "Rule",
+      "name": "Register lifecycle ViewModels through DI",
+      "statement": "Lifecycle ViewModels should be registered through the DI container's view-model DSL in UI modules and retrieved from Compose instead of being built from rememberCoroutineScope().",
+      "scope": "di",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 26,
+        "endLine": 35
+      }
+    },
+    {
+      "id": "rule.platform_contracts",
+      "type": "Rule",
+      "name": "Abstract platform capabilities behind shared contracts",
+      "statement": "Define platform capability contracts in shared code, provide platform implementations separately, and inject them through DI.",
+      "scope": "platform",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/20-platform-specific-capability-patterns.md",
+        "startLine": 5,
+        "endLine": 17
+      }
+    },
+    {
+      "id": "exception.aggregator_feature_domain_only",
+      "type": "Exception",
+      "name": "Aggregator feature exception",
+      "statement": "An aggregator-style feature may depend on other features' domain modules only, never their presentation modules.",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 12,
+        "endLine": 22
+      }
+    },
+    {
+      "id": "antipattern.cross_feature_data_coupling",
+      "type": "AntiPattern",
+      "name": "Cross-feature data-module coupling",
+      "statement": "Do not let feature data modules depend casually on other feature data modules.",
+      "replacementGuidance": "Move shared logic into shared core, expose a domain contract, or isolate setup behavior behind a dedicated shared service.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 24,
+        "endLine": 34
+      }
+    },
+    {
+      "id": "antipattern.raw_preference_parsing",
+      "type": "AntiPattern",
+      "name": "Raw preference parsing outside repositories",
+      "statement": "Do not mix raw preference parsing into UI or domain layers.",
+      "replacementGuidance": "Convert primitive storage values into domain types at the repository boundary.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/12-settings-and-preference-storage.md",
+        "startLine": 13,
+        "endLine": 24
+      }
+    },
+    {
+      "id": "antipattern.direct_system_time",
+      "type": "AntiPattern",
+      "name": "Direct system time access",
+      "statement": "Do not call system time directly throughout the app.",
+      "replacementGuidance": "Use a dedicated production time provider as the only clock access point.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/13-time-and-logical-date-practices.md",
+        "startLine": 5,
+        "endLine": 9
+      }
+    },
+    {
+      "id": "antipattern.route_leakage",
+      "type": "AntiPattern",
+      "name": "Navigation route leakage into features",
+      "statement": "Do not let navigation route types leak into every feature module by default.",
+      "replacementGuidance": "Keep route-to-screen wiring in the shared composition root and pass intent-level callbacks when feature UI does not own routing.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "id": "antipattern.hardcoded_shared_ui_strings",
+      "type": "AntiPattern",
+      "name": "Hardcoded shared UI strings",
+      "statement": "Do not hardcode user-visible strings in shared UI code.",
+      "replacementGuidance": "Use shared/core-strings Compose Resources or another deliberate shared resource module as the source of truth for user-visible strings.",
+      "classification": "kmp_oriented",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 14,
+        "endLine": 22
+      }
+    },
+    {
+      "id": "antipattern.giant_build_templates",
+      "type": "AntiPattern",
+      "name": "Giant build templates",
+      "statement": "Do not create giant module templates that hide the whole build.",
+      "replacementGuidance": "Keep templates narrow and keep real module dependencies explicit in each module.yaml.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/07-build-system-practices.md",
+        "startLine": 7,
+        "endLine": 23
+      }
+    },
+    {
+      "id": "antipattern.overbuilt_mvi",
+      "type": "AntiPattern",
+      "name": "Overbuilt MVI framework",
+      "statement": "Do not build a complicated MVI framework if a small base class is enough.",
+      "replacementGuidance": "Keep the MVI base minimal and focused on reusable primitives.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 31,
+        "endLine": 35
+      }
+    },
+    {
+      "id": "rule.no_cross_feature_presentation",
+      "type": "Rule",
+      "name": "No cross-feature presentation coupling",
+      "statement": "Feature presentation modules should not depend on other feature presentation modules.",
+      "scope": "presentation",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "id": "rule.canonical_app_identity",
+      "type": "Rule",
+      "name": "Derive one canonical app identity",
+      "statement": "Derive one canonical app identity first and normalize package roots, namespaces, app ids, and visible app identity from that source of truth.",
+      "scope": "instantiation",
+      "classification": "project_specific",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/29-package-and-app-identity-practices.md",
+        "startLine": 5,
+        "endLine": 18
+      }
+    },
+    {
+      "id": "rule.stable_composition_roots",
+      "type": "Rule",
+      "name": "Assemble dependencies at stable composition roots",
+      "statement": "Repositories, use cases, and ViewModels should be created at stable roots or factories, not inside recomposing composable bodies.",
+      "scope": "presentation",
+      "classification": "universal",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/30-stable-composition-root-practices.md",
+        "startLine": 5,
+        "endLine": 17
+      }
+    },
+    {
+      "id": "rule.root_composables_retrieve_viewmodels",
+      "type": "Rule",
+      "name": "Root composables retrieve stable ViewModels instead of building them",
+      "statement": "Root composables may retrieve DI-managed ViewModels, but they should not manufacture them by creating repositories or coroutine scopes in the composition path.",
+      "scope": "presentation",
+      "classification": "kmp_oriented",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/30-stable-composition-root-practices.md",
+        "startLine": 36,
+        "endLine": 44
+      }
+    },
+    {
+      "id": "rule.intentional_state_quality",
+      "type": "Rule",
+      "name": "Define intentional state UX",
+      "statement": "Loading, empty, content, and error states should have explicit contract expectations and should not remain placeholder-level at review time.",
+      "scope": "presentation",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/31-ui-quality-and-state-design-practices.md",
+        "startLine": 5,
+        "endLine": 31
+      }
+    },
+    {
+      "id": "antipattern.recomposing_dependency_assembly",
+      "type": "AntiPattern",
+      "name": "Dependency assembly inside recomposing composables",
+      "statement": "Do not instantiate repositories, use cases, or ViewModels inside recomposing composables.",
+      "replacementGuidance": "Move assembly to app initialization, a stable factory, or another orchestration-focused root and pass constructed dependencies downward.",
+      "classification": "universal",
+      "strength": "caution",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/26-anti-patterns-to-avoid-when-reusing-this-architecture.md",
+        "startLine": 3,
+        "endLine": 12
+      }
+    },
+    {
+      "id": "section.ios_string_localization",
+      "type": "Section",
+      "title": "iOS String Localization Practices",
+      "sectionNumber": "39",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/39-ios-string-localization-practices.md",
+        "startLine": 1,
+        "endLine": 49
+      }
+    },
+    {
+      "id": "rule.ios_xcstrings_xml_sync",
+      "type": "Rule",
+      "name": "Keep xcstrings keys and values in sync with shared strings.xml",
+      "statement": "Every xcstrings key must match a strings.xml name, and every English value must match the XML value, with %1$s converted to %@. iOS-only strings use an ios_ infix.",
+      "scope": "resources",
+      "classification": "kmp_oriented",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/39-ios-string-localization-practices.md",
+        "startLine": 5,
+        "endLine": 26
+      }
+    },
+    {
+      "id": "section.archetypes",
+      "type": "Section",
+      "title": "Archetype Practices",
+      "sectionNumber": "40",
+      "documentId": "document.best_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 1,
+        "endLine": 42
+      }
+    },
+    {
+      "id": "practice.choose_archetype",
+      "type": "Practice",
+      "name": "Choose an archetype before planning a feature",
+      "statement": "Read the archetype index and each archetype.yaml, pick the closest fit by when_to_use and when_not_to_use, and record it (or none with the reason) in the plan's Archetype section.",
+      "classification": "project_specific",
+      "strength": "default",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 5,
+        "endLine": 9
+      }
+    },
+    {
+      "id": "rule.adapt_archetype_not_copy",
+      "type": "Rule",
+      "name": "Adapt archetypes, never copy them unchanged",
+      "statement": "Rename consistently using the archetype's naming map, drop demo content (seed data, demo enums, demo strings), and keep its pitfalls in mind. Archetypes are reference code, not templates; apply-verbatim.sh is for the archetype check only.",
+      "scope": "feature-generation",
+      "classification": "project_specific",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "id": "practice.validate_archetypes",
+      "type": "Practice",
+      "name": "Re-validate archetypes when versions change",
+      "statement": "Archetype code lives outside the build. Run the archetype check (scratch copy outside git and outside /tmp, /var, /etc; apply-verbatim.sh; full verify-feature.sh) before releases and whenever the Toolchain or library versions change.",
+      "classification": "project_specific",
+      "strength": "recommended",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 25,
+        "endLine": 30
+      }
+    },
+    {
+      "id": "rule.verify_feature_gate",
+      "type": "Rule",
+      "name": "Finish a feature with the verify-feature gate",
+      "statement": "Run verify-feature.sh <feature-name> in full before reporting a feature complete. A FAILED line blocks success, and a full run with checks not run is INCOMPLETE (exit 1), never a pass. --quick is not a verification result.",
+      "scope": "verification",
+      "classification": "project_specific",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 32,
+        "endLine": 37
+      }
+    },
+    {
+      "id": "antipattern.shipping_archetype_content",
+      "type": "AntiPattern",
+      "name": "Shipping archetype content in a product feature",
+      "statement": "Leaving the sample naming, seed rows, demo categories, or demo strings in a feature, or keeping HomeRoute and placeholder_* strings after the first real feature.",
+      "replacementGuidance": "Adapt the archetype per the naming map, remove demo content, and follow the First Feature checklist to remove the placeholder before review.",
+      "classification": "project_specific",
+      "strength": "non_negotiable",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 39,
+        "endLine": 42
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.core_architecture",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 1,
+        "endLine": 26
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.feature_template",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 1,
+        "endLine": 62
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.dependency_rules",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 1,
+        "endLine": 34
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.domain_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 1,
+        "endLine": 61
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.data_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 1,
+        "endLine": 72
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.presentation_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 1,
+        "endLine": 71
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.navigation_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.resource_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 1,
+        "endLine": 30
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.di_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 1,
+        "endLine": 46
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.testing_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/23-testing-oriented-practices-to-reuse.md",
+        "startLine": 1,
+        "endLine": 29
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.defaults",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/25-recommended-default-rules-for-future-projects.md",
+        "startLine": 1,
+        "endLine": 36
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.anti_patterns",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/26-anti-patterns-to-avoid-when-reusing-this-architecture.md",
+        "startLine": 1,
+        "endLine": 12
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.identity_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/29-package-and-app-identity-practices.md",
+        "startLine": 1,
+        "endLine": 37
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.composition_root_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/30-stable-composition-root-practices.md",
+        "startLine": 1,
+        "endLine": 27
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.ui_quality_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/31-ui-quality-and-state-design-practices.md",
+        "startLine": 1,
+        "endLine": 31
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.ios_project_structure",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/35-ios-project-structure-practices.md",
+        "startLine": 1,
+        "endLine": 47
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.ios_kmp_bridge",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 1,
+        "endLine": 43
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.ios_xcode_configuration",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/37-ios-xcode-configuration-practices.md",
+        "startLine": 1,
+        "endLine": 36
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.ios_testing",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/38-ios-testing-practices.md",
+        "startLine": 1,
+        "endLine": 35
+      }
+    },
+    {
+      "from": "layer.presentation",
+      "type": "DEPENDS_ON",
+      "to": "layer.domain",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "from": "layer.data",
+      "type": "DEPENDS_ON",
+      "to": "layer.domain",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "from": "layer.domain",
+      "type": "MUST_NOT_DEPEND_ON",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "from": "layer.domain",
+      "type": "MUST_NOT_DEPEND_ON",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "from": "module.feature.domain",
+      "type": "APPLIES_TO",
+      "to": "layer.domain",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 12,
+        "endLine": 29
+      }
+    },
+    {
+      "from": "module.feature.data",
+      "type": "APPLIES_TO",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 31,
+        "endLine": 41
+      }
+    },
+    {
+      "from": "module.feature.presentation",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 43,
+        "endLine": 58
+      }
+    },
+    {
+      "from": "module.feature.domain",
+      "type": "MUST_NOT_DEPEND_ON",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 22,
+        "endLine": 29
+      }
+    },
+    {
+      "from": "module.feature.domain",
+      "type": "MUST_NOT_DEPEND_ON",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/05-feature-module-template.md",
+        "startLine": 22,
+        "endLine": 29
+      }
+    },
+    {
+      "from": "practice.feature_based_packaging",
+      "type": "APPLIES_TO",
+      "to": "section.core_architecture",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/03-core-architectural-philosophy.md",
+        "startLine": 5,
+        "endLine": 13
+      }
+    },
+    {
+      "from": "practice.shared_core_split",
+      "type": "APPLIES_TO",
+      "to": "layer.shared_core",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/08-shared-core-splitting.md",
+        "startLine": 1,
+        "endLine": 20
+      }
+    },
+    {
+      "from": "practice.typed_results",
+      "type": "SUPPORTED_BY",
+      "to": "rule.repository_translates_infrastructure",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 24,
+        "endLine": 33
+      }
+    },
+    {
+      "from": "practice.cancellation_safe_result_helpers",
+      "type": "SUPPORTED_BY",
+      "to": "rule.rethrow_cancellation_exception",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 35,
+        "endLine": 43
+      }
+    },
+    {
+      "from": "rule.domain_pure_kotlin",
+      "type": "APPLIES_TO",
+      "to": "layer.domain",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/09-domain-layer-practices.md",
+        "startLine": 5,
+        "endLine": 13
+      }
+    },
+    {
+      "from": "rule.repository_translates_infrastructure",
+      "type": "APPLIES_TO",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 5,
+        "endLine": 12
+      }
+    },
+    {
+      "from": "rule.rethrow_cancellation_exception",
+      "type": "APPLIES_TO",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 14,
+        "endLine": 27
+      }
+    },
+    {
+      "from": "practice.cache_first_reads",
+      "type": "APPLIES_TO",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 29,
+        "endLine": 37
+      }
+    },
+    {
+      "from": "rule.feature_named_http_client",
+      "type": "APPLIES_TO",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 39,
+        "endLine": 51
+      }
+    },
+    {
+      "from": "rule.mapper_placement",
+      "type": "APPLIES_TO",
+      "to": "layer.data",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 63,
+        "endLine": 72
+      }
+    },
+    {
+      "from": "rule.mapper_placement",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/10-data-layer-practices.md",
+        "startLine": 63,
+        "endLine": 72
+      }
+    },
+    {
+      "from": "rule.presentation_state_action_event",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 5,
+        "endLine": 17
+      }
+    },
+    {
+      "from": "rule.lifecycle_backed_viewmodels",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 35,
+        "endLine": 43
+      }
+    },
+    {
+      "from": "rule.sequential_action_queue",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 45,
+        "endLine": 53
+      }
+    },
+    {
+      "from": "practice.small_mvi_base",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 19,
+        "endLine": 35
+      }
+    },
+    {
+      "from": "rule.presentation_consistent_pattern",
+      "type": "REQUIRES",
+      "to": "practice.small_mvi_base",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 63,
+        "endLine": 71
+      }
+    },
+    {
+      "from": "rule.app_shell_owns_navigation",
+      "type": "OWNS",
+      "to": "layer.navigation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 5,
+        "endLine": 12
+      }
+    },
+    {
+      "from": "rule.app_shell_owns_navigation",
+      "type": "OWNS",
+      "to": "layer.design_system",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 5,
+        "endLine": 12
+      }
+    },
+    {
+      "from": "practice.callback_navigation_decoupling",
+      "type": "PREFERRED_OVER",
+      "to": "antipattern.route_leakage",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 24,
+        "endLine": 33
+      }
+    },
+    {
+      "from": "rule.shared_ui_no_hardcoded_strings",
+      "type": "REQUIRES",
+      "to": "practice.shared_strings",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 3,
+        "endLine": 22
+      }
+    },
+    {
+      "from": "rule.top_level_di_start",
+      "type": "APPLIES_TO",
+      "to": "section.di_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 5,
+        "endLine": 10
+      }
+    },
+    {
+      "from": "rule.di_managed_viewmodels",
+      "type": "APPLIES_TO",
+      "to": "section.di_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/18-dependency-injection-practices.md",
+        "startLine": 26,
+        "endLine": 34
+      }
+    },
+    {
+      "from": "practice.shared_test_utilities",
+      "type": "APPLIES_TO",
+      "to": "section.testing_practices",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/23-testing-oriented-practices-to-reuse.md",
+        "startLine": 21,
+        "endLine": 29
+      }
+    },
+    {
+      "from": "platform.shared_logic_native_ui",
+      "type": "APPLIES_TO",
+      "to": "section.defaults",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/25-recommended-default-rules-for-future-projects.md",
+        "startLine": 32,
+        "endLine": 36
+      }
+    },
+    {
+      "from": "practice.ios_host_structure",
+      "type": "APPLIES_TO",
+      "to": "section.ios_project_structure",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/35-ios-project-structure-practices.md",
+        "startLine": 5,
+        "endLine": 37
+      }
+    },
+    {
+      "from": "practice.swift_bridge_boundary",
+      "type": "APPLIES_TO",
+      "to": "section.ios_kmp_bridge",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 5,
+        "endLine": 11
+      }
+    },
+    {
+      "from": "rule.ios_export_requires_api_and_export",
+      "type": "APPLIES_TO",
+      "to": "section.ios_kmp_bridge",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 29,
+        "endLine": 35
+      }
+    },
+    {
+      "from": "rule.ios_framework_search_path",
+      "type": "APPLIES_TO",
+      "to": "section.ios_xcode_configuration",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/37-ios-xcode-configuration-practices.md",
+        "startLine": 14,
+        "endLine": 20
+      }
+    },
+    {
+      "from": "practice.shared_xcode_schemes",
+      "type": "APPLIES_TO",
+      "to": "section.ios_xcode_configuration",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/37-ios-xcode-configuration-practices.md",
+        "startLine": 30,
+        "endLine": 36
+      }
+    },
+    {
+      "from": "rule.ios_xctest_packaging",
+      "type": "APPLIES_TO",
+      "to": "section.ios_testing",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/38-ios-testing-practices.md",
+        "startLine": 5,
+        "endLine": 11
+      }
+    },
+    {
+      "from": "antipattern.swift_guessing_objc_api",
+      "type": "APPLIES_TO",
+      "to": "section.ios_kmp_bridge",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/36-ios-kmp-bridge-practices.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "from": "exception.aggregator_feature_domain_only",
+      "type": "EXCEPTION_TO",
+      "to": "rule.dependency_direction",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 12,
+        "endLine": 22
+      }
+    },
+    {
+      "from": "antipattern.cross_feature_data_coupling",
+      "type": "REPLACED_BY",
+      "to": "practice.shared_core_split",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 28,
+        "endLine": 34
+      }
+    },
+    {
+      "from": "antipattern.raw_preference_parsing",
+      "type": "REPLACED_BY",
+      "to": "rule.repository_translates_infrastructure",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/12-settings-and-preference-storage.md",
+        "startLine": 13,
+        "endLine": 24
+      }
+    },
+    {
+      "from": "antipattern.direct_system_time",
+      "type": "REPLACED_BY",
+      "to": "rule.domain_time_provider_only",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/13-time-and-logical-date-practices.md",
+        "startLine": 5,
+        "endLine": 9
+      }
+    },
+    {
+      "from": "antipattern.hardcoded_shared_ui_strings",
+      "type": "REPLACED_BY",
+      "to": "rule.shared_ui_no_hardcoded_strings",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/17-resource-and-localization-practices.md",
+        "startLine": 14,
+        "endLine": 22
+      }
+    },
+    {
+      "from": "antipattern.giant_build_templates",
+      "type": "REPLACED_BY",
+      "to": "practice.feature_based_packaging",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/07-build-system-practices.md",
+        "startLine": 16,
+        "endLine": 23
+      }
+    },
+    {
+      "from": "antipattern.overbuilt_mvi",
+      "type": "REPLACED_BY",
+      "to": "practice.small_mvi_base",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/14-presentation-layer-practices.md",
+        "startLine": 31,
+        "endLine": 35
+      }
+    },
+    {
+      "from": "practice.callback_navigation_decoupling",
+      "type": "APPLIES_TO",
+      "to": "layer.navigation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 24,
+        "endLine": 33
+      }
+    },
+    {
+      "from": "antipattern.route_leakage",
+      "type": "APPLIES_TO",
+      "to": "layer.navigation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/15-navigation-practices.md",
+        "startLine": 24,
+        "endLine": 33
+      }
+    },
+    {
+      "from": "rule.no_cross_feature_presentation",
+      "type": "APPLIES_TO",
+      "to": "layer.presentation",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/06-dependency-rules-to-keep.md",
+        "startLine": 9,
+        "endLine": 10
+      }
+    },
+    {
+      "from": "rule.root_composables_retrieve_viewmodels",
+      "type": "REQUIRES",
+      "to": "rule.stable_composition_roots",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/30-stable-composition-root-practices.md",
+        "startLine": 36,
+        "endLine": 44
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.ios_string_localization",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/39-ios-string-localization-practices.md",
+        "startLine": 1,
+        "endLine": 49
+      }
+    },
+    {
+      "from": "rule.ios_xcstrings_xml_sync",
+      "type": "APPLIES_TO",
+      "to": "section.ios_string_localization",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/39-ios-string-localization-practices.md",
+        "startLine": 5,
+        "endLine": 26
+      }
+    },
+    {
+      "from": "rule.ios_xcstrings_xml_sync",
+      "type": "REQUIRES",
+      "to": "practice.shared_strings",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/39-ios-string-localization-practices.md",
+        "startLine": 5,
+        "endLine": 26
+      }
+    },
+    {
+      "from": "document.best_practices",
+      "type": "CONTAINS",
+      "to": "section.archetypes",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 1,
+        "endLine": 42
+      }
+    },
+    {
+      "from": "practice.choose_archetype",
+      "type": "APPLIES_TO",
+      "to": "section.archetypes",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 5,
+        "endLine": 9
+      }
+    },
+    {
+      "from": "rule.adapt_archetype_not_copy",
+      "type": "APPLIES_TO",
+      "to": "section.archetypes",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "from": "practice.validate_archetypes",
+      "type": "APPLIES_TO",
+      "to": "section.archetypes",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 25,
+        "endLine": 30
+      }
+    },
+    {
+      "from": "rule.verify_feature_gate",
+      "type": "APPLIES_TO",
+      "to": "section.archetypes",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 32,
+        "endLine": 37
+      }
+    },
+    {
+      "from": "antipattern.shipping_archetype_content",
+      "type": "APPLIES_TO",
+      "to": "section.archetypes",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 39,
+        "endLine": 42
+      }
+    },
+    {
+      "from": "antipattern.shipping_archetype_content",
+      "type": "REPLACED_BY",
+      "to": "rule.adapt_archetype_not_copy",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 39,
+        "endLine": 42
+      }
+    },
+    {
+      "from": "rule.adapt_archetype_not_copy",
+      "type": "REQUIRES",
+      "to": "practice.choose_archetype",
+      "source": {
+        "file": ".opencode/knowledge-graph/best-practices/40-archetype-practices.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    }
+  ]
+}

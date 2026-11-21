@@ -1,0 +1,182 @@
+# 5. Feature Module Template
+
+The canonical feature shape in Dream is:
+
+```text
+feature/
+  <name>-domain/
+  <name>-data/
+  <name>-api/
+  <name>-impl/        # Android-only (Compose)
+```
+
+Module name equals directory name and must be unique, so leaf directories are `<name>-domain`, `<name>-data`, `<name>-api`, `<name>-impl`. Modules are referenced as `//feature/<name>-impl` in `dependencies`. Kotlin packages are unchanged (`com.example.feature.<name>.domain`).
+
+Typical `module.yaml` shapes:
+
+```yaml
+# <name>-domain / <name>-data / <name>-api
+product:
+  type: kmp/lib
+  platforms: [android, iosArm64, iosSimulatorArm64]
+apply:
+  - //templates/common.module-template.yaml
+dependencies:
+  - //shared/core-domain: exported
+settings:
+  android:
+    namespace: com.example.feature.<name>.domain
+
+# <name>-impl (Android-only)
+product:
+  type: kmp/lib
+  platforms: [android]
+apply:
+  - //templates/feature-impl.module-template.yaml
+dependencies:
+  - //feature/<name>-api
+  - //feature/<name>-domain
+settings:
+  android:
+    namespace: com.example.feature.<name>.impl
+  kotlin:
+    compilerPlugins:
+      - id: io.insert-koin.compiler.plugin
+        dependency: $libs.koin.compiler.plugin
+        options:
+          moduleId: <name>-impl
+```
+
+Compose and the `impl` module are Android-only; iOS uses SwiftUI plus the `domain`/`data` modules.
+
+Multi-word features must use one consistent naming convention across module names (which equal directory names) and Kotlin packages. Use a single slug consistently, such as `expense-details-impl` with `com.example.feature.expense.details...`, and document the mapping between slug and package segments. Module names must stay unique across the project.
+
+### 5.1 Domain module responsibilities
+
+`domain` should contain:
+
+- domain models
+- repository interfaces
+- use cases
+- domain-specific errors
+- pure business rules
+
+`domain` should not contain:
+
+- Compose
+- Android APIs
+- iOS APIs
+- Room annotations
+- Ktor clients
+- DataStore (setup lives in `shared/core-data` with expect/actual)
+
+### 5.2 Data module responsibilities
+
+`data` should contain:
+
+- repository implementations
+- DAO usage
+- DTOs
+- mappers
+- remote calls
+- local caching logic
+- exception-to-domain-error mapping
+
+### 5.3 API module responsibilities
+
+`api` defines the public surface of the feature. Other modules navigate to this feature through its `api` without knowing anything about its implementation.
+
+`api` should contain:
+
+- feature `NavKey` route types (e.g. `data object SampleRoute : NavKey`)
+- any other minimal public presentation contracts needed by the app shell or other features
+
+`api` should not contain:
+
+- screens or composables
+- ViewModels
+- Koin module definitions
+- Room, Ktor, or data-layer code
+
+Dependency rule: any module that needs to navigate to this feature depends on `//feature/<name>-api`, never on `//feature/<name>-impl`.
+
+### 5.4 Impl module responsibilities
+
+`impl` provides the full feature implementation. Nothing outside this feature should depend on it directly.
+
+`impl` should contain:
+
+- screens and content composables
+- UI models: state, action, event, item, content
+- mapper classes that map domain models into UI models
+- ViewModels
+- Koin module that registers the ViewModel and installs Navigation 3 entry providers via `navigation<Route> { FeatureScreen() }`
+- platform UI effects only when needed
+
+Presentation mapper rule:
+
+- map from domain models to UI models inside the impl layer
+- implement presentation mappers as classes, not extension functions
+- keep mapping logic explicit so it is easy to inject, test, replace, and review
+
+Mapper invocation rule:
+
+- inject PresentationMapper into ViewModels via Koin `factory` — do not create mappers in composables via `remember { }`
+- ViewModels must use the injected mapper to convert domain models into UI models before exposing them in state
+- composable views must receive already-mapped UI models and perform zero domain-to-UI transformation
+
+UI state rule:
+
+- ViewModel state fields must use UI model types, not domain types
+- domain models must not appear in state classes — they must be stopped at the ViewModel boundary
+- UI model classes live in `feature/<name>-impl` alongside state, action, and event definitions
+
+`impl` depends on:
+
+- `//feature/<name>-api`
+- `//feature/<name>-domain`
+- shared presentation helpers and design system
+
+### 5.5 Why this template scales
+
+This split keeps the public navigation contract stable and small. Other features and the app shell depend only on `api`. The `impl` can be replaced, refactored, or tested in isolation without affecting callers. Review discussions are clearer because every class has an obvious home and cross-feature coupling is easy to detect from the dependency graph.
+
+### 5.6 Feature DI Module boilerplate
+
+Every feature `impl` module needs a Koin module that registers ViewModels and installs Navigation 3 entry providers. The pattern is identical across features:
+
+```kotlin
+// feature/<name>-impl/src/com/.../di/<Name>Module.kt
+@OptIn(KoinExperimentalAPI::class)
+val <name>UiModule = module {
+    factory<PresentationMapper> { PresentationMapper(get()) }
+    viewModel<FeatureViewModel> { FeatureViewModel(get(), get()) }
+
+    navigation<FeatureListRoute> {
+        val navigator = koinInject<Navigator>()
+        FeatureListScreen(
+            onNavigateDetail = { id -> navigator.goTo(FeatureDetailRoute(id)) },
+        )
+    }
+
+    navigation<FeatureDetailRoute> { route ->
+        val navigator = koinInject<Navigator>()
+        FeatureDetailScreen(
+            selectedId = route.id,
+            onNavigateBack = { navigator.goBack() },
+        )
+    }
+}
+```
+
+Registration steps for a new feature:
+
+1. Create the DI module file in `feature/<name>-impl/src/.../di/`
+2. Add the feature dependencies to `shared/umbrella-ui/module.yaml`:
+   ```yaml
+   dependencies:
+     - //feature/<name>-impl
+     - //feature/<name>-api: exported
+   ```
+3. Import and add `<name>UiModule` to the `modules(...)` call in `UiModule.kt`
+4. Verify with `./kotlin test -m umbrella-ui --platform=android` — the DI graph test confirms all registrations resolve without eager instantiation

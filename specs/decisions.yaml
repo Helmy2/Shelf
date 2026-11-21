@@ -1,0 +1,5 @@
+template: dream-kmp-base
+architecture: modular-hybrid
+androidUi: jetpack-compose
+iosUi: swiftui
+storage: none
