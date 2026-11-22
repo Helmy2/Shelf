@@ -222,6 +222,13 @@ akeys="$( [ -f "$ANDROID_STRINGS" ] && grep -oE "name=\"${PREFIX}[A-Za-z0-9_]*\"
 if [ -n "$akeys" ]; then emit ok S3 "$(echo "$akeys" | wc -l | tr -d ' ') Android string key(s) with prefix ${PREFIX}"
 else emit warn S3 "no Android string keys with prefix ${PREFIX} in $ANDROID_STRINGS (use a different prefix? then S4 cannot compare)"; fi
 
+# Compose Multiplatform resources show Android-style \' and \" escapes verbatim (use ' and &quot; instead).
+if [ -d shared/core-strings/composeResources ]; then
+  bad="$(grep -rnE "\\\\['\"]" shared/core-strings/composeResources --include='strings*.xml' 2>/dev/null | sed -E 's/^([^:]*:[0-9]+):.*/\1/' | tr '\n' ' ')"
+  if [ -z "$bad" ]; then emit ok S5 "no backslash-escaped quotes in composeResources strings (CMP would render them literally)"
+  else emit fail S5 "backslash before ' or \" in composeResources strings (rendered verbatim by CMP; use ' and &quot;): $bad"; fi
+fi
+
 # ---------------------------------------------------------------- I: iOS
 ios_present=false
 [ "$IOS" != no ] && [ -d "iosApp/src/$IOS_DIR" ] && ios_present=true
@@ -255,8 +262,10 @@ import json, re, sys
 import xml.etree.ElementTree as ET
 
 xml_path, xc_path, prefix = sys.argv[1:4]
-esc = {"n": "\n", "t": "\t"}
-unescape = lambda v: re.sub(r"\\(.)", lambda m: esc.get(m.group(1), m.group(1)), v)
+# Raw values: the XML parser already turns &quot; &amp; &lt; &gt; into characters. Backslashes are NOT stripped,
+# so an Android value with \' or \" never equals the iOS value (S5 reports the same defect). Only the \n and
+# \t escapes are converted, because CMP renders them as whitespace.
+unescape = lambda v: v.replace("\\n", "\n").replace("\\t", "\t")
 android = {e.get("name"): unescape(e.text or "") for e in ET.parse(xml_path).getroot().findall("string")
            if e.get("name", "").startswith(prefix)}
 ios = {}

@@ -1,0 +1,19 @@
+# Checkpoints: book
+
+- Phase 0 (plan confirmed by user, 2026-11-22): branch `dream/feature/book` created from main (73f862c). Preflight passed (git, Android SDK, Xcode, ./kotlin, Java).
+- Slice 1 started: contract.yaml written.
+- Slice 1 done (842ccce, 2026-11-22): full gate 41 passed / 0 FAILED / 1 warning (S2, documented); Android and iOS launch checks passed; Maestro iOS passed, Maestro Android blocked by environment (manual run passed).
+- Slice 2 started: detail and edit.
+- Slice 2 gate run 1 (2026-11-22): verify-feature.sh 39 passed / 0 FAILED / 3 warnings; iOS passed; Android FAILED a device check: Add form opens with stale state after earlier form use (shared BookFormViewModel across routes); minor: edit prefill cursor at position 0. Repair round 1 of 3 started. iosApp/module.xcodeproj/project.pbxproj churn is Toolchain regeneration; not committed.
+- Slice 2 repair round 1 (2026-11-22): per-entry ViewModel scoping + state reset + cursor-at-end fix; re-gate 41 passed / 0 FAILED / 1 warning (S2, documented); Android and iOS device checks passed; Maestro iOS passed, Maestro Android blocked by environment.
+- Slice 2 done (7f2b64f).
+- Slice 3 started: rating and notes.
+- Slice 3 done (d9005b4): full gate 41 passed / 0 FAILED / 1 warning (S2, documented); Android and iOS device checks passed; Maestro iOS passed, Maestro Android blocked by environment. No repair rounds.
+- Slice 4 started: status filter (presentation-only).
+- Slice 4 gate run 1 (2026-11-22): verify-feature.sh 41 passed / 0 FAILED / 1 warning; iOS passed (Maestro iOS passed); Android functional checks passed but one bug: strings.xml uses \' and \" escapes that Compose Resources render verbatim (book_empty_filtered_body seen on device; book_error_title, book_save_error_title, book_detail_error_title affected too). Repair round 1 of 3 started. Slices 1-3 shipped these three error-title strings with the same escape (error states were never rendered on a device).
+- Slice 4 repair round 1 (2026-11-22): string escapes fixed (plain ' and &quot;), gate check S5 added; re-gate 42 passed / 0 FAILED / 1 warning (S2, documented); Android and iOS checks passed; Maestro iOS passed, Maestro Android blocked by environment; error-title rendering not run (verified statically).
+- Slice 4 done (09dd080).
+- Slice 5 started: delete.
+- Slice 4 repair and slice 4 done earlier; Slice 5 done (33b30a1, 2026-11-22): full gate 42 passed / 0 FAILED / 1 warning (S2, documented); Android and iOS device checks passed; Maestro iOS passed, Maestro Android blocked by environment. No repair rounds.
+- All 5 slices done; next: dream-inspector over the whole feature.
+- Inspector review 1 (2026-11-22): no critical defects; 4 warnings (W1 keyed ViewModels leak, W2 shared TextField cursor behavior, W3 gate S4/S5 self-test hole, W4 Maestro covers add only) and 4 info items. User chose: repair all. Inspector repair round 1 of 2 started.

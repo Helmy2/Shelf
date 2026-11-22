@@ -1,0 +1,143 @@
+# Shelf book feature, iOS smoke flow (slices 1-5).
+# Keep in sync with android.yaml: same scenario, platform-specific selectors only where needed.
+# Form fields and rating stars use accessibility identifiers (book_title_field,
+# book_author_field, book_notes_field, book_rating_star_N); everything else is text.
+# Maestro text selectors are full-match regexes. List rows expose ONE combined label, e.g.
+# "Emma by Austen, Finished, rated 4 of 5" or "Dune, Want to read" (no author).
+# Single-line fields are submitted with Enter (title -> author -> notes); the notes field is
+# multi-line, so it is never submitted with Enter (that would add a newline).
+appId: com.shelf.ios
+---
+- clearState
+- launchApp
+
+# ---- Slice 1: empty state, validation, add "Dune" ----
+- assertVisible: "Your shelf is empty"
+- tapOn: "Add book"
+# Blank title is rejected
+- tapOn: "Save"
+- assertVisible: "Title is required"
+- tapOn:
+    id: "book_title_field"
+- inputText: "Dune"
+- pressKey: Enter
+- tapOn: "Save"
+- extendedWaitUntil:
+    visible: "Dune, Want to read"
+    timeout: 5000
+
+# ---- Slice 3: add "Emma" as Finished, rating 4, notes ----
+- tapOn: "Add book"
+- tapOn:
+    id: "book_title_field"
+- inputText: "Emma"
+- pressKey: Enter
+- tapOn:
+    id: "book_author_field"
+- inputText: "Austen"
+- pressKey: Enter
+- tapOn: "Finished"
+- tapOn:
+    id: "book_rating_star_4"
+- tapOn:
+    id: "book_notes_field"
+- inputText: "Great read"
+- tapOn: "Save"
+# Newest first; the combined row label carries the rating
+- extendedWaitUntil:
+    visible: "Emma by Austen, Finished, rated 4 of 5"
+    timeout: 5000
+- assertVisible: "Dune, Want to read"
+
+# ---- Slice 2/3: detail ----
+- tapOn: "Emma by Austen.*"
+- extendedWaitUntil:
+    visible: ".*Great read"
+    timeout: 5000
+- assertVisible: "Emma"
+- assertVisible: "Austen"
+- assertVisible: "Rating.*4 of 5"   # rating row is one combined element
+- assertVisible: ".*Great read"
+
+# ---- Slice 2: edit the title ----
+- tapOn: "Edit"
+- extendedWaitUntil:
+    visible: "Edit book"
+    timeout: 5000
+- tapOn:
+    id: "book_title_field"
+- eraseText
+- inputText: "Emma Revised"
+- pressKey: Enter
+- tapOn: "Save"
+- extendedWaitUntil:
+    visible: "Book details"
+    timeout: 5000
+- assertVisible: "Emma Revised"
+- assertVisible: ".*Great read"
+- tapOn: "Shelf"                    # system back button, labelled with the list title (text only)
+- extendedWaitUntil:
+    visible: "Emma Revised by Austen, Finished, rated 4 of 5"
+    timeout: 5000
+
+# ---- Slice 4: status filter ----
+# The chip row scrolls horizontally and "Finished" is clipped at the right edge at default text size, so swipe the row first.
+- swipe:
+    start: 80%,24%
+    end: 20%,24%
+- tapOn: "Finished"               # chip (rows are matched by their longer combined label)
+- assertVisible: "Emma Revised by Austen.*"
+- assertNotVisible: "Dune, Want to read"
+- tapOn: "Want to read"
+- assertVisible: "Dune, Want to read"
+- assertNotVisible: "Emma Revised by Austen.*"
+# Per-filter empty state and its Show all button
+- tapOn: "Reading"
+- assertVisible: "No matching books"
+- tapOn: "Show all"
+- assertVisible: "Dune, Want to read"
+- assertVisible: "Emma Revised by Austen.*"
+# The All chip also restores both
+# After "Show all" the row resets to its start, so swipe again before tapping Finished.
+- swipe:
+    start: 80%,24%
+    end: 20%,24%
+- tapOn: "Finished"
+- assertNotVisible: "Dune, Want to read"
+# Scroll the chip row back left so the "All" chip is on-screen.
+- swipe:
+    start: 20%,24%
+    end: 80%,24%
+- tapOn: "All"
+- assertVisible: "Dune, Want to read"
+- assertVisible: "Emma Revised by Austen.*"
+
+# ---- Slice 5: delete (cancel first, then confirm) ----
+- tapOn: "Emma Revised by Austen.*"
+- extendedWaitUntil:
+    visible: "Delete Emma Revised"   # Delete button accessibility label
+    timeout: 5000
+- tapOn: "Delete Emma Revised"
+- assertVisible: "Delete this book?"
+- tapOn: "Cancel"
+- assertNotVisible: "Delete this book?"
+- assertVisible: "Emma Revised"      # still on the detail, book kept
+- tapOn: "Delete Emma Revised"
+- assertVisible: "Delete this book?"
+- tapOn: "Delete"                    # alert confirm button (exact text)
+- extendedWaitUntil:
+    visible: "Dune, Want to read"
+    timeout: 5000
+- assertNotVisible: "Emma Revised.*"
+
+# Delete the last book: back to the slice 1 empty state
+- tapOn: "Dune, Want to read"
+- extendedWaitUntil:
+    visible: "Delete Dune"
+    timeout: 5000
+- tapOn: "Delete Dune"
+- assertVisible: "Delete this book?"
+- tapOn: "Delete"
+- extendedWaitUntil:
+    visible: "Your shelf is empty"
+    timeout: 5000

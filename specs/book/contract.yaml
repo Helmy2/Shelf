@@ -1,0 +1,72 @@
+feature: book
+archetype: local-crud
+plan: specs/book/plan.md
+platforms: [android, ios]
+backend: false
+storage: room   # database shelf_book.db, table book_items, schema version 1, exported schema, no destructive migration
+
+timeSensitiveBehavior:
+  usesTimeProvider: true   # createdAtMillis set via TimeProvider; list ordered newest first
+
+naming:
+  entity: BookItem
+  status: BookStatus
+  repository: BookRepository
+  routes: [BookListRoute, BookDetailRoute, BookEditRoute]
+  modules: [book-domain, book-data, book-api, book-impl]
+  koinModuleIds: {data: book-data, impl: book-impl}
+
+entity:
+  BookItem:   # full shape defined in slice 1; later slices extend behavior, not shape
+    id: Long                      # auto-generated, 0 for new
+    title: String                 # required, trimmed, non-blank
+    author: String                # optional, empty string when absent
+    status: BookStatus
+    rating: Int?                  # 1..5, only when status == Finished (enforced in slice 3)
+    notes: String                 # free text, empty when absent
+    createdAtMillis: Long         # from TimeProvider
+  BookStatus: [WantToRead, Reading, Finished]
+
+errors:
+  - TitleRequired
+  - RatingOutOfRange      # enforced from slice 3
+  - NotFound              # used from slice 2
+
+repository:
+  BookRepository:
+    - observeBooks(): Flow<List<BookItem>>       # newest first
+    - observeBook(id): Flow<BookItem?>           # slice 2
+    - addBook(draft): Result<BookItem, BookError>
+    - updateBook(book): Result<BookItem, BookError>   # slice 2
+    - deleteBook(id): Result<Unit, BookError>         # slice 5
+
+actions:
+  slice1:
+    - OpenAdd           # list -> form
+    - SaveBook(title, author, status)
+    - CancelForm
+
+screens:
+  slice1:
+    BookList:  {states: [Loading, Empty, Content, Error], actions: [OpenAdd]}
+    BookForm:  {states: [Content, ValidationError, Error], fields: [title (required), author, status picker], actions: [SaveBook, CancelForm]}
+
+validation:
+  slice1: "Saving with a blank (whitespace-only) title shows a title-required error and does not persist."
+
+tests:
+  domain: [BookItemTest (title rules), BookRepositoryContractTest]
+  data: [BookItemMapperTest, RoomBookRepositoryTest (fake DAO)]
+  presentation: [BookViewModelTest (loading, empty, content, error, save, validation)]
+  umbrella-core: [BookDataModuleTest]
+  ios: [BookListViewModelTests with MockBookRepositoryBridge]
+
+strings: "Keys prefixed book_ ; identical in shared/core-strings and iosApp/src/Localizable.xcstrings"
+
+change_notes:
+  - "slice 1: initial contract."
+  - "slice 5: delete. Repository: deleteBook(id: Long): BookResult<Unit> (real signature uses the feature-local BookResult from slice 1; the repository sketch above says Result<Unit, BookError>, the implemented type wins); use case DeleteBook(id). Deleting an id that does not exist returns BookError.NotFound; the UI treats NotFound exactly like success (the book is already gone: return to the list). Delete is triggered only from the detail screen (no swipe-to-delete, no delete on rows) and always asks for confirmation first (Cancel keeps the book, Confirm deletes). While the delete runs, the confirm action is disabled (no double submit). On success the detail closes and the app returns to the list; the book is gone from every filter and after relaunch. Deleting the last book shows the slice 1 empty state and resets the filter to All (slice 4 rule). A failed delete (BookError.Unknown) keeps the detail open and shows an inline/transient error with the book unchanged; strings book_delete_*. iOS bridge: new deleteBookOrThrow(id) in BookRepositoryExtensions.kt (throws BookBridgeException; NotFound distinguishable). No entity or schema change (Room schema stays v1). Detail screen gets a Delete action (destructive style) at the reserved slot below notes; Edit stays in the top bar/toolbar. Detail and edit form interplay: if the book disappears while the edit form is open, the existing Not found behavior applies."
+  - "slice 4: status filter on the list, presentation-only (no domain, data, api or schema change; repository observeBooks() still returns all books newest first). List UI state gains selectedFilter: BookListFilter = All | WantToRead | Reading | Finished (UI enum in book-impl and the Swift list view model, not a domain type) and the visible rows are the observed books filtered by status, order unchanged. Action: SelectFilter(filter). Defaults to All on every launch (not persisted); the selection is kept while navigating to detail/form and back. Empty states: no books at all keeps the slice 1 empty state (Add button); books exist but none match the selected filter shows a per-filter empty state. After adding or editing a book that does not match the active filter, it is simply not listed until the filter changes (no automatic reset). If the shelf becomes empty (no books at all, e.g. after the last delete in slice 5) selectedFilter resets to All so a later added book is never hidden by an invisible filter. SelectFilter with the current value is a no-op. Visible rows are the observed books filtered by status (order unchanged); the filter control is shown only when the unfiltered book count is at least 1."
+  - "slice 3: rating and notes become editable and visible. Domain rules (BookItem.validated and the draft validation): title rule unchanged; rating is Int? and optional (a finished book may have no rating); if status != Finished the rating is normalized to null (cleared, not rejected); if status == Finished and rating is non-null it must be 1..5, else BookError.RatingOutOfRange; notes are free text, stored as given (not trimmed beyond null->empty). Add and update both apply these rules. Form: rating selector (1-5, with a way to clear) shown only when status is Finished; switching status away from Finished clears the rating in form state; notes multi-line field. Detail shows rating (Finished only, when set) and notes (hidden when empty). List rows show the rating in the trailing area (Finished with rating only). iOS bridge change (recorded because it changes slice 1/2 definitions): addBookOrThrow and updateBookOrThrow gain parameters rating: Int? and notes: String; existing call sites updated. No entity or schema change (fields exist since slice 1, Room schema stays v1). UpdateBook now also persists rating and notes (slice 2 kept them as stored)."
+  - "slice 2: adds BookDetailRoute(id: Long); repository observeBook(id) and updateBook(book); use cases ObserveBook, UpdateBook; list rows become tappable (open detail); the form is reused for edit via BookEditRoute(id). Nothing from slice 1 is renamed. Update keeps id and createdAtMillis unchanged and applies the same title validation (TitleRequired). If the book no longer exists, observeBook emits null (detail Not found) and updateBook returns NotFound. Detail screen shows title, author, status, and (slice 3) rating and notes; Edit action only (delete is slice 5)."
+  - "slice 1: BookEditRoute(id: Long? = null) is created in slice 1 (not slice 2) because the Android add form is a full-screen route per ui-spec.md. Slice 2 reuses it for edit. BookDetailRoute stays in slice 2."

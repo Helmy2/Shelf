@@ -1,7 +1,9 @@
 package com.shelf.shared.di
 
-import com.shelf.shared.home.HomeRoute
-import com.shelf.shared.home.placeholderHomeModule
+import com.shelf.feature.book.api.navigation.BookListRoute
+import com.shelf.feature.book.data.di.bookDataModule
+import com.shelf.feature.book.data.local.BookDatabaseFactory
+import com.shelf.feature.book.impl.di.bookUiModule
 import com.shelf.shared.navigation.Navigator
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -9,7 +11,7 @@ import org.koin.dsl.module
 
 
 val navigatorModule = module {
-    single { Navigator(startDestination = HomeRoute) }
+    single { Navigator(startDestination = BookListRoute) }
 }
 
 private var hasStartedKoin = false
@@ -19,6 +21,7 @@ private var hasStartedKoin = false
  * data module and UI module here, and give [initKoin] whatever platform factories they need.
  */
 fun initKoin(
+    bookDatabaseFactory: BookDatabaseFactory,
     appContext: Any? = null,
     appDeclaration: KoinAppDeclaration = {}
 ) {
@@ -28,7 +31,8 @@ fun initKoin(
         appDeclaration()
         modules(
             coreModule(appContext),
-            placeholderHomeModule,
+            bookDataModule(bookDatabaseFactory),
+            bookUiModule,
             navigatorModule,
         )
     }

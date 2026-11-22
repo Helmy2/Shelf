@@ -4,7 +4,11 @@ Dream uses Maestro for black-box smoke validation after a platform build install
 
 Smoke files are feature-owned. During feature generation, create or update flows under `maestro/features/<feature-name>/` with checks that match the generated feature contract.
 
-Use `.opencode/guidance/templates/maestro-smoke-checklist-template.md` when replacing the placeholders.
+Shelf's flows live in `maestro/features/book/` (`android.yaml`, `ios.yaml`, kept in sync) and cover all five slices in one scenario: empty state, blank-title validation, add "Dune"; add "Emma" by "Austen" as Finished with rating 4 and notes; row shows the rating; open the detail and check title, author, "Rating, 4 of 5" and notes; edit the title to "Emma Revised" and check detail and list; status filter chips (Finished, Want to read, the per-filter empty state with "Show all", and All); delete with the confirmation dialog (Cancel keeps the book, Delete removes it); deleting the last book returns to "Your shelf is empty".
+
+On iOS the status filter chips are a horizontally scrolling row, so the filter steps swipe the chip row (`swipe` at 24% y) before tapping Finished and All; the 24% y-position was measured on iPhone 18 Pro and may need adjusting on other devices. Android chips wrap and need no swipe.
+
+Selectors: iOS uses accessibility identifiers for form fields and rating stars (`book_title_field`, `book_author_field`, `book_notes_field`, `book_rating_star_N`) and text elsewhere; Android has no testTags, so it uses visible text and content descriptions (e.g. `4 of 5 stars`). List rows expose one combined label (`Emma by Austen, Finished, rated 4 of 5`, `Dune, Want to read`), so flows match rows by that label. Maestro text selectors are full-match regexes: escape parentheses and use `.*`. Use `.opencode/guidance/templates/maestro-smoke-checklist-template.md` when adding flows for new slices.
 
 Required structure:
 

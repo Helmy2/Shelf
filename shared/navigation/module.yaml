@@ -13,6 +13,7 @@ dependencies:
   - $libs.compose.material3
   - $libs.navigation3.runtime: exported
   - $libs.navigation3.ui
+  - $libs.androidx.lifecycle.viewmodelNavigation3
 
 settings:
   android:

@@ -1,6 +1,6 @@
 # Dream Generated Project Instructions
 
-This folder is a self-contained Dream Kotlin Multiplatform starter project. It is meant to be copied by the initializer, renamed for a new app, then opened directly in OpenCode.
+Shelf is a local-only book reading log built from the Dream Kotlin Multiplatform starter (feature `book`: `feature/book-{domain,data,api,impl}`, SwiftUI in `iosApp/src/Book`). No starter placeholder screen remains. It is opened directly in OpenCode.
 
 ## Start Here
 

@@ -1,5 +1,7 @@
 package com.shelf.shared.navigation
 
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.compose.runtime.Composable
 import androidx.navigation3.runtime.NavKey
@@ -15,6 +17,11 @@ fun AppNavigation() {
     NavDisplay(
         backStack = navigator.backStack,
         onBack = { navigator.goBack() },
+        // The ViewModel decorator scopes ViewModels to their back stack entry and clears them on pop.
+        entryDecorators = listOf(
+            rememberSaveableStateHolderNavEntryDecorator(),
+            rememberViewModelStoreNavEntryDecorator()
+        ),
         entryProvider = koinEntryProvider<NavKey>()
     )
 }

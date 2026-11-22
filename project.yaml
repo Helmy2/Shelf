@@ -8,5 +8,9 @@ modules:
   - shared/navigation
   - shared/umbrella-core
   - shared/umbrella-ui
+  - feature/book-domain
+  - feature/book-data
+  - feature/book-api
+  - feature/book-impl
   - androidApp
   - iosApp

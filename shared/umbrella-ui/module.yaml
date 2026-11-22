@@ -8,6 +8,10 @@ apply:
 
 dependencies:
   - //shared/umbrella-core
+  - //feature/book-data
+  - //feature/book-domain
+  - //feature/book-api: exported
+  - //feature/book-impl
   - //shared/core-presentation
   - //shared/core-strings
   - //shared/designsystem: exported

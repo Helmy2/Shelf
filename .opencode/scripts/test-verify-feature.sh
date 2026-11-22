@@ -41,6 +41,11 @@ expect() {
 
 IMPL="feature/$F-impl"; DOM="feature/$F-domain"; DATA="feature/$F-data"; API="feature/$F-api"
 
+# Plants an Android-style \' escape into the sample's first string value (scratch copy only).
+plant_escaped_quote() {
+  python3 -I -c "import sys;p='shared/core-strings/composeResources/values/strings.xml';s=open(p).read();k='name=\"$1_add\">';open(p,'w').write(s.replace(k,k+chr(92)+chr(39),1))"
+}
+
 expect "unmodified project has no FAILED check"                clean   -    ":"
 expect "module missing from project.yaml"                      FAILED  M2   "perl -ni -e \"print unless m{feature/$F-data}\" project.yaml"
 expect "missing module.yaml"                                   FAILED  M1   "rm $API/module.yaml"
@@ -58,6 +63,9 @@ expect "hardcoded UI text in impl"                             warning S1   "d=\
 expect "iOS string key missing"                                FAILED  S4   "python3 -I -c \"import json;p='iosApp/src/Localizable.xcstrings';d=json.load(open(p));del d['strings']['${F}_add'];json.dump(d,open(p,'w'))\""
 expect "iOS-only string key without an ios_ infix"             FAILED  S4   "python3 -I -c \"import json;p='iosApp/src/Localizable.xcstrings';d=json.load(open(p));d['strings']['${F}_orphan']=d['strings']['${F}_add'];json.dump(d,open(p,'w'))\""
 expect "iOS string value differs from Android"                 FAILED  S4   "python3 -I -c \"import json;p='iosApp/src/Localizable.xcstrings';d=json.load(open(p));d['strings']['${F}_add']['localizations']['en']['stringUnit']['value']='Changed';json.dump(d,open(p,'w'))\""
+expect "escaped quote in composeResources strings"             FAILED  S5   "plant_escaped_quote $F"
+expect "escaped quote makes Android differ from iOS"           FAILED  S4   "plant_escaped_quote $F"
+expect "XML entities and unescaped quotes pass S4 and S5"      clean   -    "perl -pi -e 's/(<string name=\"${F}_add\">)([^<]*)/\$1\$2 &amp; &quot;/' shared/core-strings/composeResources/values/strings.xml; python3 -I -c \"import json;p='iosApp/src/Localizable.xcstrings';d=json.load(open(p));u=d['strings']['${F}_add']['localizations']['en']['stringUnit'];u['value']+=' & \\\\\\\"';json.dump(d,open(p,'w'))\""
 expect "Maestro appId mismatch"                                FAILED  E1   "perl -pi -e 's/^appId:.*/appId: com.wrong.app/' maestro/features/$F/android.yaml"
 expect "Swift tests removed"                                   FAILED  I3   "rm -f iosApp/test/*.swift"
 expect "stripped appTests testable is repaired and reported"   warning I4   "perl -0pi -e 's/<Testables>.*?<\\/Testables>/<Testables>\n      <\\/Testables>/s' iosApp/module.xcodeproj/xcshareddata/xcschemes/iosApp.xcscheme"
