@@ -43,7 +43,6 @@ import com.shelf.shared.core.strings.book_stats_error_body
 import com.shelf.shared.core.strings.book_stats_error_title
 import com.shelf.shared.core.strings.book_stats_no_ratings
 import com.shelf.shared.core.strings.book_stats_rated_count
-import com.shelf.shared.core.strings.book_stats_status_count_a11y
 import com.shelf.shared.core.strings.book_stats_summary_a11y
 import com.shelf.shared.core.strings.book_stats_title
 import com.shelf.shared.designsystem.AppTheme
@@ -161,52 +160,57 @@ private fun BookStatsLoaded(stats: BookStatsUi, modifier: Modifier = Modifier) {
             },
         verticalArrangement = Arrangement.spacedBy(DreamTheme.spacing.md),
     ) {
-        Card(variant = CardVariant.Elevated, modifier = Modifier.fillMaxWidth().clearAndSetSemantics {}) {
-            // The design-system Card is non-clickable here, so Material3 supplies the disabled content color.
-            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
-                Column(verticalArrangement = Arrangement.spacedBy(DreamTheme.spacing.sm)) {
-                    StatusCountRow(BookStatusUi.WantToRead.label(), stats.wantToReadCount)
-                    StatusCountRow(BookStatusUi.Reading.label(), stats.readingCount)
-                    StatusCountRow(BookStatusUi.Finished.label(), stats.finishedCount)
-                }
+        StatsCardContent {
+            Column(verticalArrangement = Arrangement.spacedBy(DreamTheme.spacing.sm)) {
+                StatusCountRow(BookStatusUi.WantToRead.label(), stats.wantToReadCount)
+                StatusCountRow(BookStatusUi.Reading.label(), stats.readingCount)
+                StatusCountRow(BookStatusUi.Finished.label(), stats.finishedCount)
             }
         }
-        Card(variant = CardVariant.Elevated, modifier = Modifier.fillMaxWidth().clearAndSetSemantics {}) {
-            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
-                Column(verticalArrangement = Arrangement.spacedBy(DreamTheme.spacing.xs)) {
+        StatsCardContent {
+            Column(verticalArrangement = Arrangement.spacedBy(DreamTheme.spacing.xs)) {
+                Text(
+                    text = stringResource(Res.string.book_stats_average_label),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                if (stats.averageText == null) {
                     Text(
-                        text = stringResource(Res.string.book_stats_average_label),
-                        style = MaterialTheme.typography.labelLarge,
+                        text = stringResource(Res.string.book_stats_no_ratings),
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                } else {
+                    Text(
+                        text = stringResource(Res.string.book_stats_average_value, stats.averageText),
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        text = stringResource(Res.string.book_stats_rated_count, stats.ratedCount.toString()),
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
-                    if (stats.averageText == null) {
-                        Text(
-                            text = stringResource(Res.string.book_stats_no_ratings),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                    } else {
-                        Text(
-                            text = stringResource(Res.string.book_stats_average_value, stats.averageText),
-                            style = MaterialTheme.typography.headlineMedium,
-                            color = MaterialTheme.colorScheme.primary,
-                        )
-                        Text(
-                            text = stringResource(Res.string.book_stats_rated_count, stats.ratedCount.toString()),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
                 }
             }
         }
     }
 }
 
+/** Elevated, accessibility-hidden card; the merged summary on the parent carries the semantics. */
+@Composable
+private fun StatsCardContent(content: @Composable () -> Unit) {
+    Card(variant = CardVariant.Elevated, modifier = Modifier.fillMaxWidth().clearAndSetSemantics {}) {
+        // The design-system Card is non-clickable here, so Material3 supplies the disabled content color.
+        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
+            content()
+        }
+    }
+}
+
 @Composable
 private fun StatusCountRow(label: String, count: Int) {
-    val description = stringResource(Res.string.book_stats_status_count_a11y, label, count.toString())
     Row(
-        modifier = Modifier.fillMaxWidth().semantics { contentDescription = description },
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {

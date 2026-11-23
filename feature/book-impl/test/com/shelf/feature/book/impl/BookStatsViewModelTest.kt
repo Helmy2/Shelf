@@ -66,6 +66,27 @@ class BookStatsViewModelTest {
         assertEquals("4.3", stats.averageText)
     }
 
+    // Parity fixture: keep in sync with iosApp/test/BookStatsTests.swift (testAverageTextParityFixture).
+    // Ties (4.25) must round half up to "4.3" on both platforms.
+    @Test
+    fun averageTextParityFixtureRoundsHalfUp() = runTest(dispatcher) {
+        val fixture = listOf(
+            listOf(4, 5) to "4.5",
+            listOf(4, 4, 4, 5) to "4.3",
+            listOf(3, 4, 4) to "3.7",
+            listOf(5) to "5.0",
+        )
+        for ((ratings, expected) in fixture) {
+            val books = ratings.mapIndexed { i, r ->
+                book(i + 1L, "B$i", status = BookStatus.Finished, rating = r)
+            }
+            val vm = viewModel(FakeBookRepository(books))
+            advanceUntilIdle()
+            val stats = assertIs<BookStatsContentState.Content>(vm.state.value.contentState).stats
+            assertEquals(expected, stats.averageText, "ratings=$ratings")
+        }
+    }
+
     @Test
     fun noRatingsHasNullAverage() = runTest(dispatcher) {
         val vm = viewModel(FakeBookRepository(listOf(book(1, "A", status = BookStatus.Finished))))

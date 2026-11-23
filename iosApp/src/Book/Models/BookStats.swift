@@ -21,7 +21,9 @@ struct BookStats: Equatable {
     /// One-decimal average, e.g. "4.2"; nil when there are no ratings.
     var averageText: String? {
         guard let averageRating else { return nil }
-        return String(format: "%.1f", averageRating)
+        // Round half up to match Android's formatOneDecimal (String(format:) is half-to-even).
+        let tenths = Int((averageRating * 10).rounded(.toNearestOrAwayFromZero))
+        return "\(tenths / 10).\(tenths % 10)"
     }
 
     static func compute(from books: [BookItemSwift]) -> BookStats {
@@ -41,9 +43,9 @@ struct BookStats: Equatable {
     var accessibilitySummary: String {
         let averagePart: String
         if let averageText {
-            averagePart = String(
-                format: String(localized: "book_stats_average_value"), averageText
-            )
+            averagePart = String(localized: "book_stats_average_label") + ": "
+                + String(format: String(localized: "book_stats_average_value"), averageText) + ", "
+                + String(format: String(localized: "book_stats_rated_count"), String(ratedCount))
         } else {
             averagePart = String(localized: "book_stats_no_ratings")
         }

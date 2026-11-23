@@ -59,7 +59,6 @@
     <string name="book_delete_success_a11y">%1$s deleted</string>
     <string name="book_stats_title">Reading stats</string>
     <string name="book_stats_action">Stats</string>
-    <string name="book_stats_status_count_a11y">%1$s: %2$s books</string>
     <string name="book_stats_average_label">Average rating</string>
     <string name="book_stats_average_value">%1$s out of 5</string>
     <string name="book_stats_rated_count">%1$s rated</string>
@@ -69,5 +68,4 @@
     <string name="book_stats_summary_a11y">%1$s want to read, %2$s reading, %3$s finished. %4$s</string>
     <string name="book_stats_error_title">Couldn't load stats</string>
     <string name="book_stats_error_body">Something went wrong. Try again.</string>
-    <string name="book_stats_loading">Loading stats</string>
 </resources>

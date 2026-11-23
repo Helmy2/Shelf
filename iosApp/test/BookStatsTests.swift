@@ -72,6 +72,23 @@ final class BookStatsTests: XCTestCase {
         XCTAssertEqual(stats.averageText, "4.2")
     }
 
+    // Parity fixture: keep in sync with BookStatsViewModelTest.averageTextParityFixtureRoundsHalfUp
+    // (feature/book-impl/test/.../BookStatsViewModelTest.kt). Ties (4.25) round half up to "4.3".
+    func testAverageTextParityFixture() {
+        let fixture: [(ratings: [Int], expected: String)] = [
+            ([4, 5], "4.5"),
+            ([4, 4, 4, 5], "4.3"),
+            ([3, 4, 4], "3.7"),
+            ([5], "5.0")
+        ]
+        for (ratings, expected) in fixture {
+            let books = ratings.enumerated().map { index, rating in
+                makeBook(id: Int64(index + 1), status: .finished, rating: rating)
+            }
+            XCTAssertEqual(BookStats.compute(from: books).averageText, expected, "ratings=\(ratings)")
+        }
+    }
+
     func testAccessibilitySummary() {
         let stats = BookStats.compute(from: [
             makeBook(id: 1, status: .wantToRead),
@@ -79,7 +96,7 @@ final class BookStatsTests: XCTestCase {
         ])
         XCTAssertEqual(
             stats.accessibilitySummary,
-            "1 want to read, 0 reading, 1 finished. 4.0 out of 5"
+            "1 want to read, 0 reading, 1 finished. Average rating: 4.0 out of 5, 1 rated"
         )
         let unrated = BookStats.compute(from: [makeBook(status: .reading)])
         XCTAssertEqual(

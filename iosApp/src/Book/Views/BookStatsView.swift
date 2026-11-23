@@ -14,7 +14,7 @@ struct BookStatsView: View {
             case .loading:
                 VStack(spacing: DreamSpacing.md) {
                     DreamCircularProgressIndicator(size: .large)
-                    Text("book_stats_loading")
+                    Text("book_loading_title")
                         .font(.dreamBodyMedium)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }
@@ -53,39 +53,37 @@ struct BookStatsView: View {
                 averageCard(stats)
             }
             .padding(DreamSpacing.lg)
+            // One merged summary, matching Android (cards are visual only).
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(stats.accessibilitySummary)
         }
     }
 
     private func statusCard(_ status: BookStatus, count: Int) -> some View {
-        DreamCard(variant: .outlined) {
+        DreamCard(variant: .elevated) {
             HStack {
                 Text(status.displayName)
                     .font(.dreamBodyLarge)
                     .foregroundStyle(colors.onSurface)
                 Spacer()
                 Text("\(count)")
-                    .font(.dreamTitleMedium)
+                    .font(.dreamTitleLarge)
                     .foregroundStyle(colors.primary)
             }
         }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(
-            String(
-                format: String(localized: "book_stats_status_count_a11y"),
-                status.displayName, String(count)
-            )
-        )
     }
 
     private func averageCard(_ stats: BookStats) -> some View {
-        DreamCard(variant: .filled) {
+        DreamCard(variant: .elevated) {
             VStack(alignment: .leading, spacing: DreamSpacing.xs) {
                 Text("book_stats_average_label")
                     .font(.dreamBodyMedium)
                     .foregroundStyle(colors.onSurfaceVariant)
                 if let averageText = stats.averageText {
-                    Text(averageText)
-                        .font(.dreamTitleMedium)
+                    Text(String(
+                        format: String(localized: "book_stats_average_value"), averageText
+                    ))
+                        .font(.dreamHeadlineMedium)
                         .foregroundStyle(colors.primary)
                     Text(String(
                         format: String(localized: "book_stats_rated_count"), String(stats.ratedCount)
@@ -99,7 +97,5 @@ struct BookStatsView: View {
                 }
             }
         }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(stats.accessibilitySummary)
     }
 }

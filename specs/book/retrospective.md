@@ -28,3 +28,5 @@ ViewModel clearing after a pop, TalkBack/VoiceOver, Dynamic Type at accessibilit
 - Numeric format args: use string placeholders on both platforms (`%1$s` / `%@`); `%d` vs `%lld` fails S4. Worth adding to the archetype pitfalls.
 - Design-system `Card` without `onClick` renders disabled (pale content colour). Hit again after slice 1; the archetype or design system should offer a non-interactive card.
 - Stats screen was not added to `ui-spec.md` and has no Maestro flow.
+- Inspector (slice 6): the Swift re-implementation of the stats computation drifted from Kotlin on rounding (half-even vs half-up on ties). When a rule is duplicated across the bridge, add shared fixtures (same inputs and expected strings) to both test suites, and prefer a single merged a11y element for read-only summaries.
+- Remember: the design-system `Card` without `onClick` disabled-colour issue still needs a real fix in `shared/designsystem` (slice 6 uses a local `LocalContentColor` override).

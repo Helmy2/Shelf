@@ -628,17 +628,6 @@
         }
       }
     },
-    "book_stats_loading" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading stats"
-          }
-        }
-      }
-    },
     "book_stats_no_ratings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -657,17 +646,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ rated"
-          }
-        }
-      }
-    },
-    "book_stats_status_count_a11y" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@: %@ books"
           }
         }
       }
