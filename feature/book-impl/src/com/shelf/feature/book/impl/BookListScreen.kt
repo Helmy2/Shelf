@@ -67,6 +67,7 @@ import com.shelf.shared.core.strings.book_error_title
 import com.shelf.shared.core.strings.book_list_title
 import com.shelf.shared.core.strings.book_loading_title
 import com.shelf.shared.core.strings.book_retry
+import com.shelf.shared.core.strings.book_stats_action
 import com.shelf.shared.core.strings.book_row_accessibility
 import com.shelf.shared.core.strings.book_row_accessibility_no_author
 import com.shelf.shared.core.strings.book_row_open_hint
@@ -87,6 +88,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun BookListScreen(
     onNavigateToAdd: () -> Unit,
     onNavigateToDetail: (Long) -> Unit,
+    onNavigateToStats: () -> Unit,
     viewModel: BookListViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
@@ -104,6 +106,7 @@ fun BookListScreen(
         viewModel.eventFlow.collect { event ->
             when (event) {
                 BookListEvent.NavigateToAdd -> onNavigateToAdd()
+                BookListEvent.NavigateToStats -> onNavigateToStats()
                 is BookListEvent.NavigateToDetail -> onNavigateToDetail(event.id)
             }
         }
@@ -130,6 +133,13 @@ fun BookListContent(
             TopAppBar(
                 title = stringResource(Res.string.book_list_title),
                 actions = {
+                    if (state.contentState is BookListContentState.Content) {
+                        Button(
+                            text = stringResource(Res.string.book_stats_action),
+                            onClick = { onAction(BookListAction.OpenStats) },
+                            variant = ButtonVariant.Tertiary,
+                        )
+                    }
                     Button(
                         text = stringResource(Res.string.book_add),
                         onClick = { onAction(BookListAction.OpenAdd) },

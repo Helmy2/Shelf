@@ -22,3 +22,9 @@ ViewModel clearing after a pop, TalkBack/VoiceOver, Dynamic Type at accessibilit
 - Promote the filter chips and star selector to `shared/designsystem` if a second screen needs them; add design-system wrappers for `Scaffold`/`Text` or change S2.
 - Add a Swift VoiceOver check for the rating stars (XCUITest showed the SF Symbol label "Favorite").
 - Consider a full-output Maestro Android run in the next gate (the last report relied on the final 40 lines).
+
+## Slice 6 - reading stats
+
+- Numeric format args: use string placeholders on both platforms (`%1$s` / `%@`); `%d` vs `%lld` fails S4. Worth adding to the archetype pitfalls.
+- Design-system `Card` without `onClick` renders disabled (pale content colour). Hit again after slice 1; the archetype or design system should offer a non-interactive card.
+- Stats screen was not added to `ui-spec.md` and has no Maestro flow.

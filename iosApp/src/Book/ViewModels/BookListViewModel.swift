@@ -22,6 +22,9 @@ enum BookListFilter: CaseIterable, Identifiable {
     }
 }
 
+/// Navigation value for the reading stats screen.
+struct BookStatsDestination: Hashable {}
+
 @Observable
 final class BookListViewModel {
     enum ContentState {
@@ -102,6 +105,13 @@ final class BookListViewModel {
         formViewModel = BookFormViewModel(bridge: bridge, onSaved: { [weak self] in
             await self?.load(force: true)
         })
+    }
+
+    /// Stats entry point shows only when at least one book exists.
+    var showsStatsAction: Bool { !allBooks.isEmpty }
+
+    func makeStatsViewModel() -> BookStatsViewModel {
+        BookStatsViewModel(bridge: bridge)
     }
 
     func makeDetailViewModel(id: Int64) -> BookDetailViewModel {

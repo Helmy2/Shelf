@@ -159,3 +159,20 @@ Final full gate after the code repairs: `verify-feature.sh book` 42 passed, 0 FA
 - Maestro's `inputText` into the iOS multi-line Notes field leaves a leading space, so the flows match notes text with a regex (`.*Great read`); the app does not add the space (notes are stored as typed).
 - Emulator: restarting right after `adb emu kill` can hit the AVD lock; wait for the lock to clear before relaunching.
 - The mobile-mcp device tool was not available for the final rounds; those used `adb`, `xcrun simctl` and Maestro.
+
+## Slice 6 - reading stats (2026-11-23)
+
+Gate: `.opencode/scripts/verify-feature.sh book` (full), final run: 42 passed, 0 FAILED, 1 warning (S2, raw Material3 imports, already documented), 0 not run.
+
+| Item | Status |
+|------|--------|
+| Structure, architecture, wiring, strings (S4 parity after repair), iOS structure, Maestro files | passed |
+| `./kotlin build`, Android tests (book-impl 78), iOS simulator tests, both app builds | passed |
+| Swift tests (68, iPhone 18 Pro simulator) | passed |
+| Android emulator: Stats action hidden when empty, counts 1/1/2, "4.5 out of 5", "2 rated", "No ratings yet", back navigation, logcat | passed |
+| iOS simulator: same checks, crash reports | passed |
+| Android stats card contrast (light and dark, pixel-sampled contrast ratios) | passed after repair; judged by sampling, not by eye |
+| Maestro flows for stats | not run |
+| Spec compliance against `ui-spec.md` (stats screen not added to the spec) | not run |
+
+Repairs: S4 (%d vs %lld, now string placeholders); disabled-looking stats cards (design-system `Card` without onClick; fixed with `LocalContentColor`). One simulator crash during B7 (Mach error -308) was an environment flake; passed after resetting the simulator.

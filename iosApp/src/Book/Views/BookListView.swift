@@ -46,6 +46,13 @@ struct BookListView: View {
             }
             .navigationTitle("book_list_title")
             .toolbar {
+                if viewModel.showsStatsAction {
+                    ToolbarItem(placement: .primaryAction) {
+                        NavigationLink(value: BookStatsDestination()) {
+                            Label("book_stats_action", systemImage: "chart.bar")
+                        }
+                    }
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button("book_add", systemImage: "plus") {
                         viewModel.startAdd()
@@ -54,6 +61,9 @@ struct BookListView: View {
             }
             .navigationDestination(for: Int64.self) { id in
                 BookDetailView(viewModel: viewModel.makeDetailViewModel(id: id))
+            }
+            .navigationDestination(for: BookStatsDestination.self) { _ in
+                BookStatsView(viewModel: viewModel.makeStatsViewModel())
             }
             .sheet(isPresented: $viewModel.showForm) {
                 if let formViewModel = viewModel.formViewModel {

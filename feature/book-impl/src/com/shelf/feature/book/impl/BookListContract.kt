@@ -43,6 +43,7 @@ sealed interface BookListContentState {
 
 sealed interface BookListAction {
     data object OpenAdd : BookListAction
+    data object OpenStats : BookListAction
     data class OpenBook(val id: Long) : BookListAction
     data object Retry : BookListAction
     data class SelectFilter(val filter: BookListFilter) : BookListAction
@@ -50,5 +51,6 @@ sealed interface BookListAction {
 
 sealed interface BookListEvent {
     data object NavigateToAdd : BookListEvent
+    data object NavigateToStats : BookListEvent
     data class NavigateToDetail(val id: Long) : BookListEvent
 }

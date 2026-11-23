@@ -13,3 +13,7 @@ data class BookEditRoute(val id: Long? = null) : NavKey
 /** Read-only detail of the book with the given [id]. */
 @Serializable
 data class BookDetailRoute(val id: Long) : NavKey
+
+/** Read-only reading stats screen. */
+@Serializable
+data object BookStatsRoute : NavKey
