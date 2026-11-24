@@ -326,6 +326,7 @@ Read-only screen derived from the existing book list. No domain, data or schema 
 - Content is announced as one polite combined summary (`book_stats_summary_a11y`): "1 want to read, 1 reading, 2 finished. Average rating: 4.5 out of 5, 2 rated" (or "... No ratings yet"). Same sentence on both platforms.
 - The summary is the only accessibility element of the Content state on both platforms: the visual status and average cards are hidden from accessibility (no per-card labels, so counts are never read twice).
 - Rounding: the average is rounded half up to one decimal on both platforms (4.25 shows "4.3"). The same fixtures (4,5 -> "4.5"; 4,4,4,5 -> "4.3"; 3,4,4 -> "3.7"; 5 -> "5.0") are asserted in the Kotlin and the Swift tests.
+- Decimal separator: the average is deliberately formatted with "." on both platforms, regardless of device locale. Reason: the common source set cannot use String.format/java.text (anti-9), and Android and iOS must show the same text; locale-aware formatting is deferred.
 - Back and Retry are standard focusable controls with the 48dp / 44pt minimum target.
 
 ### Acceptance checklist

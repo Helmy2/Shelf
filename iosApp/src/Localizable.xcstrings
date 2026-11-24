@@ -562,6 +562,17 @@
         }
       }
     },
+    "book_stats_average_a11y" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: %@, %@"
+          }
+        }
+      }
+    },
     "book_stats_average_label" : {
       "extractionState" : "manual",
       "localizations" : {

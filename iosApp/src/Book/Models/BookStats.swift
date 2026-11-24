@@ -43,9 +43,12 @@ struct BookStats: Equatable {
     var accessibilitySummary: String {
         let averagePart: String
         if let averageText {
-            averagePart = String(localized: "book_stats_average_label") + ": "
-                + String(format: String(localized: "book_stats_average_value"), averageText) + ", "
-                + String(format: String(localized: "book_stats_rated_count"), String(ratedCount))
+            averagePart = String(
+                format: String(localized: "book_stats_average_a11y"),
+                String(localized: "book_stats_average_label"),
+                String(format: String(localized: "book_stats_average_value"), averageText),
+                String(format: String(localized: "book_stats_rated_count"), String(ratedCount))
+            )
         } else {
             averagePart = String(localized: "book_stats_no_ratings")
         }

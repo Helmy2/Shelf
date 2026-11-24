@@ -14,10 +14,10 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -35,6 +35,7 @@ import com.shelf.shared.core.strings.Res
 import com.shelf.shared.core.strings.book_add
 import com.shelf.shared.core.strings.book_back
 import com.shelf.shared.core.strings.book_retry
+import com.shelf.shared.core.strings.book_stats_average_a11y
 import com.shelf.shared.core.strings.book_stats_average_label
 import com.shelf.shared.core.strings.book_stats_average_value
 import com.shelf.shared.core.strings.book_stats_empty_body
@@ -138,9 +139,12 @@ private fun BookStatsLoaded(stats: BookStatsUi, modifier: Modifier = Modifier) {
     val averageSpoken = if (stats.averageText == null) {
         stringResource(Res.string.book_stats_no_ratings)
     } else {
-        stringResource(Res.string.book_stats_average_label) + ": " +
-            stringResource(Res.string.book_stats_average_value, stats.averageText) + ", " +
-            stringResource(Res.string.book_stats_rated_count, stats.ratedCount.toString())
+        stringResource(
+            Res.string.book_stats_average_a11y,
+            stringResource(Res.string.book_stats_average_label),
+            stringResource(Res.string.book_stats_average_value, stats.averageText),
+            stringResource(Res.string.book_stats_rated_count, stats.ratedCount.toString()),
+        )
     }
     val summary = stringResource(
         Res.string.book_stats_summary_a11y,

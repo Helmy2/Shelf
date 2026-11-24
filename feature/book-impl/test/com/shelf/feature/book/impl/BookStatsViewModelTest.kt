@@ -27,7 +27,7 @@ class BookStatsViewModelTest {
     @AfterTest
     fun tearDown() = Dispatchers.resetMain()
 
-    private fun viewModel(repo: FakeBookRepository) = BookStatsViewModel(ObserveBookStats(repo))
+    private fun viewModel(repo: FakeBookRepository) = BookStatsViewModel(ObserveBookStats(repo), BookPresentationMapper())
 
     @Test
     fun startsInLoading() = runTest(dispatcher) {

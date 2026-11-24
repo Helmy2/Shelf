@@ -61,6 +61,7 @@
     <string name="book_stats_action">Stats</string>
     <string name="book_stats_average_label">Average rating</string>
     <string name="book_stats_average_value">%1$s out of 5</string>
+    <string name="book_stats_average_a11y">%1$s: %2$s, %3$s</string>
     <string name="book_stats_rated_count">%1$s rated</string>
     <string name="book_stats_no_ratings">No ratings yet</string>
     <string name="book_stats_empty_title">No books yet</string>
