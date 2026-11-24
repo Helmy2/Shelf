@@ -61,6 +61,7 @@ class BookListViewModel(
     override suspend fun handleAction(action: BookListAction) {
         when (action) {
             BookListAction.OpenAdd -> sendEvent(BookListEvent.NavigateToAdd)
+            BookListAction.OpenStats -> sendEvent(BookListEvent.NavigateToStats)
             is BookListAction.OpenBook -> sendEvent(BookListEvent.NavigateToDetail(action.id))
             BookListAction.Retry -> startObserving()
             is BookListAction.SelectFilter -> updateState { current ->

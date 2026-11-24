@@ -87,6 +87,16 @@ class BookListViewModelTest {
     }
 
     @Test
+    fun openStatsEmitsNavigateToStats() = runTest(dispatcher) {
+        val vm = viewModel(FakeBookRepository(listOf(book(1, "Emma"))))
+        vm.eventFlow.test {
+            vm.onAction(BookListAction.OpenStats)
+            advanceUntilIdle()
+            assertEquals(BookListEvent.NavigateToStats, awaitItem())
+        }
+    }
+
+    @Test
     fun openBookEmitsNavigateToDetailWithId() = runTest(dispatcher) {
         val vm = viewModel(FakeBookRepository(listOf(book(3, "Emma"))))
         vm.eventFlow.test {

@@ -1,8 +1,10 @@
 package com.shelf.feature.book.impl
 
 import com.shelf.feature.book.domain.model.BookStatus
+import com.shelf.feature.book.domain.model.computeBookStats
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertIs
 import kotlin.test.assertNull
 
 class BookPresentationMapperTest {
@@ -82,6 +84,33 @@ class BookPresentationMapperTest {
         assertNull(mapper.toItemUi(reading).rating)
         assertNull(mapper.toDetailUi(reading).rating)
         assertNull(mapper.toItemUi(book(3, "C", status = BookStatus.Finished)).rating)
+    }
+
+    @Test
+    fun statsEmptyWhenNoBooks() {
+        assertEquals(BookStatsContentState.Empty, mapper.toStatsContentState(computeBookStats(emptyList())))
+    }
+
+    @Test
+    fun statsMapsCountsAndAverageHalfUpWithDotSeparator() {
+        val books = listOf(
+            book(1, "A", status = BookStatus.WantToRead),
+            book(2, "B", status = BookStatus.Reading),
+            book(3, "C", status = BookStatus.Finished, rating = 4),
+            book(4, "D", status = BookStatus.Finished, rating = 4),
+            book(5, "E", status = BookStatus.Finished, rating = 4),
+            book(6, "F", status = BookStatus.Finished, rating = 5),
+        )
+        val state = mapper.toStatsContentState(computeBookStats(books))
+        assertEquals(BookStatsContentState.Content(BookStatsUi(1, 1, 4, 4, "4.3")), state)
+    }
+
+    @Test
+    fun statsAverageNullWithoutRatings() {
+        val state = mapper.toStatsContentState(
+            computeBookStats(listOf(book(1, "A", status = BookStatus.Finished))),
+        )
+        assertNull(assertIs<BookStatsContentState.Content>(state).stats.averageText)
     }
 
     @Test

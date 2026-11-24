@@ -2,7 +2,9 @@ package com.shelf.feature.book.impl
 
 import com.shelf.feature.book.domain.model.BookDraft
 import com.shelf.feature.book.domain.model.BookItem
+import com.shelf.feature.book.domain.model.BookStats
 import com.shelf.feature.book.domain.model.BookStatus
+import kotlin.math.roundToInt
 
 class BookPresentationMapper {
     fun toItemUi(item: BookItem): BookItemUi = BookItemUi(
@@ -48,6 +50,31 @@ class BookPresentationMapper {
         rating = form.rating,
         notes = form.notes,
     )
+
+    fun toStatsContentState(stats: BookStats): BookStatsContentState {
+        val wantToRead = stats.countByStatus[BookStatus.WantToRead] ?: 0
+        val reading = stats.countByStatus[BookStatus.Reading] ?: 0
+        val finished = stats.countByStatus[BookStatus.Finished] ?: 0
+        if (wantToRead == 0 && reading == 0 && finished == 0) return BookStatsContentState.Empty
+        return BookStatsContentState.Content(
+            BookStatsUi(
+                wantToReadCount = wantToRead,
+                readingCount = reading,
+                finishedCount = finished,
+                ratedCount = stats.ratedCount,
+                averageText = stats.averageRating?.let(::formatOneDecimal),
+            ),
+        )
+    }
+
+    /**
+     * Locale independent one-decimal formatting (e.g. 4.2), rounding half up, always with "." as the
+     * decimal separator (common code cannot use String.format/java.text).
+     */
+    private fun formatOneDecimal(value: Double): String {
+        val tenths = (value * 10).roundToInt()
+        return "${tenths / 10}.${tenths % 10}"
+    }
 
     /** Only a Finished book shows its rating. */
     private fun BookItem.visibleRating(): Int? = if (status == BookStatus.Finished) rating else null

@@ -551,6 +551,138 @@
         }
       }
     },
+    "book_stats_action" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stats"
+          }
+        }
+      }
+    },
+    "book_stats_average_a11y" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: %@, %@"
+          }
+        }
+      }
+    },
+    "book_stats_average_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average rating"
+          }
+        }
+      }
+    },
+    "book_stats_average_value" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ out of 5"
+          }
+        }
+      }
+    },
+    "book_stats_empty_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a book to see your reading stats."
+          }
+        }
+      }
+    },
+    "book_stats_empty_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No books yet"
+          }
+        }
+      }
+    },
+    "book_stats_error_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong. Try again."
+          }
+        }
+      }
+    },
+    "book_stats_error_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't load stats"
+          }
+        }
+      }
+    },
+    "book_stats_no_ratings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No ratings yet"
+          }
+        }
+      }
+    },
+    "book_stats_rated_count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ rated"
+          }
+        }
+      }
+    },
+    "book_stats_summary_a11y" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ want to read, %@ reading, %@ finished. %@"
+          }
+        }
+      }
+    },
+    "book_stats_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading stats"
+          }
+        }
+      }
+    },
     "book_status_finished" : {
       "extractionState" : "manual",
       "localizations" : {

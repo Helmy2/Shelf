@@ -294,3 +294,50 @@ Reused: `book_cancel`, `book_back_to_shelf`, `book_not_found_*`. Args: `%1$s` in
 | `book_delete_error_title` | Couldn't delete the book |
 | `book_delete_error_body` | Your book is still on your shelf. Try again. |
 | `book_delete_success_a11y` | %1$s deleted |
+
+## Slice 6: Reading stats
+
+Read-only screen derived from the existing book list. No domain, data or schema change beyond the pure `BookStats` computation.
+
+### Entry point
+
+- A "Stats" action (`book_stats_action`) next to Add in the list top bar (Android Tertiary button) / toolbar (iOS), shown only when the list has at least one book (list Content state; never in Loading, Empty or Error).
+- Tapping it pushes the stats screen (Android `BookStatsRoute`; iOS NavigationStack push). Back returns to the list with the filter selection unchanged.
+
+### Screen
+
+- Title `book_stats_title` ("Reading stats"); back arrow (Android top bar) / system back (iOS).
+- One non-interactive card per status in order Want to read, Reading, Finished: status label (existing status labels) and the count.
+- One average card: label `book_stats_average_label`; when at least one Finished book has a rating, the value `book_stats_average_value` ("4.5 out of 5", one decimal, same on both platforms) and `book_stats_rated_count` ("2 rated"); otherwise only `book_stats_no_ratings` ("No ratings yet"). Finished books without a rating are excluded from the average and the rated count; ratings on non-Finished books never exist (cleared by validation).
+- Updates live (Android observes the repository flow; iOS reloads each time the screen appears).
+- Non-interactive cards must not look disabled: full-contrast text in light and dark mode (design-system `Card` without `onClick` renders disabled; override the content colour).
+
+### States
+
+| State | Content |
+|-------|---------|
+| Loading | progress indicator with the existing `book_loading_title` on both platforms (no stats-specific loading key) |
+| Empty | all three counts are 0: `book_stats_empty_title`, `book_stats_empty_body`; Android also an Add book button (iOS: none, accepted difference; the Stats action is hidden on an empty shelf, so this is reachable only after the last book is deleted while the screen is open) |
+| Content | cards as above |
+| Error | `book_stats_error_title`, `book_stats_error_body`, Retry (`book_retry`) |
+
+### Accessibility
+
+- Content is announced as one polite combined summary (`book_stats_summary_a11y`): "1 want to read, 1 reading, 2 finished. Average rating: 4.5 out of 5, 2 rated" (or "... No ratings yet"). Same sentence on both platforms.
+- The summary is the only accessibility element of the Content state on both platforms: the visual status and average cards are hidden from accessibility (no per-card labels, so counts are never read twice).
+- Rounding: the average is rounded half up to one decimal on both platforms (4.25 shows "4.3"). The same fixtures (4,5 -> "4.5"; 4,4,4,5 -> "4.3"; 3,4,4 -> "3.7"; 5 -> "5.0") are asserted in the Kotlin and the Swift tests.
+- Decimal separator: the average is deliberately formatted with "." on both platforms, regardless of device locale. Reason: the common source set cannot use String.format/java.text (anti-9), and Android and iOS must show the same text; locale-aware formatting is deferred.
+- Back and Retry are standard focusable controls with the 48dp / 44pt minimum target.
+
+### Acceptance checklist
+
+1. Empty shelf: no Stats action.
+2. With Want to read 1, Reading 1, Finished 2 rated 4 and 5: counts 1/1/2, "4.5 out of 5", "2 rated".
+3. Only an unrated Finished book: "No ratings yet", no "out of 5".
+4. Back returns to the list; filter selection unchanged.
+5. Text is readable (not faded) in light and dark mode.
+
+### Platform notes (slice 6)
+
+- Cosmetic differences between platforms are accepted where the design system differs (card variant, value font size); behavior, copy, rounding and accessibility are identical.
+- iOS computes the stats in Swift from the bridge's `loadBooks()` result (same pattern as the list); the Kotlin `computeBookStats` stays the domain source of truth, and the shared fixtures above guard against drift.

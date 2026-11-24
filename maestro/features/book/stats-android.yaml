@@ -1,0 +1,50 @@
+# Shelf book feature, Android Reading stats flow (slice 6).
+# Keep in sync with stats-ios.yaml. Selectors are visible text / content descriptions.
+# The stats body is ONE merged element (live region) whose description is the summary
+# sentence "1 want to read, 0 reading, 1 finished. Average rating: 4.0 out of 5, 1 rated";
+# the visual rows/cards are hidden from accessibility, so assert on that sentence.
+appId: com.shelf.android
+---
+- clearState
+- launchApp
+
+# Empty shelf: no Stats action
+- assertVisible: "Your shelf is empty"
+- assertNotVisible: "Stats"
+
+# Add "Dune" (Want to read)
+- tapOn: "Add book"
+- tapOn: "Title"
+- inputText: "Dune"
+- tapOn: "Save"
+- extendedWaitUntil:
+    visible: "Dune, Want to read"
+    timeout: 5000
+
+# Add "Emma" (Finished, rated 4)
+- tapOn: "Add book"
+- tapOn: "Title"
+- inputText: "Emma"
+- hideKeyboard
+- tapOn: "Finished"
+- tapOn: "4 of 5 stars"
+- tapOn: "Save"
+- extendedWaitUntil:
+    visible: "Emma, Finished, rated 4 of 5"
+    timeout: 5000
+
+# Stats action now present
+- tapOn: "Stats"
+- extendedWaitUntil:
+    visible: "Reading stats"
+    timeout: 5000
+- assertVisible: ".*1 want to read, 0 reading, 1 finished.*"
+- assertVisible: ".*4\\.0 out of 5.*"
+- assertVisible: ".*1 rated.*"
+
+# Back to the list
+- tapOn: "Back"
+- extendedWaitUntil:
+    visible: "Dune, Want to read"
+    timeout: 5000
+- assertVisible: "Emma, Finished, rated 4 of 5"
